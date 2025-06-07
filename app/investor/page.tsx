@@ -826,7 +826,7 @@ export default function InvestorDashboard() {
               </Card>
             </div>
 
-            {/* Recommendations */}
+            {/* Recommendations
             <Card>
               <CardHeader>
                 <CardTitle>Recommended for You</CardTitle>
@@ -839,7 +839,7 @@ export default function InvestorDashboard() {
                   ))}
                 </div>
               </CardContent>
-            </Card>
+            </Card> */}
 
             {/* Recent Activity */}
             <Card>

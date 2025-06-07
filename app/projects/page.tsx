@@ -19,9 +19,9 @@ const allProjects = [
     id: "1",
     title: "Organic Jasmine Rice Farm - Season 2024",
     category: "Rice",
-    location: "Chiang Mai, Thailand",
-    province: "Chiang Mai",
-    region: "North",
+    location: "Pune, India",
+    province: "Maharashtra",
+    region: "West",
     farmer: "Somchai Jaidee",
     farmerRating: 4.8,
     investmentGoal: 25000,
@@ -43,9 +43,9 @@ const allProjects = [
     id: "2",
     title: "Hydroponic Tomato Greenhouse",
     category: "Vegetables",
-    location: "Nonthaburi, Thailand",
-    province: "Nonthaburi",
-    region: "Central",
+    location: "Bangalore, India",
+    province: "Karnataka",
+    region: "South",
     farmer: "Malee Srisuk",
     farmerRating: 4.9,
     investmentGoal: 45000,
@@ -67,9 +67,9 @@ const allProjects = [
     id: "3",
     title: "Medicinal Herb Cultivation Farm",
     category: "Herbs",
-    location: "Chiang Rai, Thailand",
-    province: "Chiang Rai",
-    region: "North",
+    location: "Hyderabad, India",
+    province: "Telangana",
+    region: "South",
     farmer: "Niran Thanakit",
     farmerRating: 4.7,
     investmentGoal: 28000,
@@ -91,9 +91,9 @@ const allProjects = [
     id: "4",
     title: "Sweet Corn Commercial Farm",
     category: "Corn",
-    location: "Lopburi, Thailand",
-    province: "Lopburi",
-    region: "Central",
+    location: "Lucknow, India",
+    province: "Uttar Pradesh",
+    region: "North",
     farmer: "Prasert Kaewmala",
     farmerRating: 4.6,
     investmentGoal: 30000,
@@ -115,8 +115,8 @@ const allProjects = [
     id: "5",
     title: "Organic Wheat Production Initiative",
     category: "Wheat",
-    location: "Saraburi, Thailand",
-    province: "Saraburi",
+    location: "Indore, India",
+    province: "Madhya Pradesh",
     region: "Central",
     farmer: "Wichai Boonmee",
     farmerRating: 4.5,
@@ -139,9 +139,9 @@ const allProjects = [
     id: "6",
     title: "Premium Coffee Bean Plantation",
     category: "Specialty Crops",
-    location: "Doi Chang, Thailand",
-    province: "Chiang Mai",
-    region: "North",
+    location: "Darjeeling, India",
+    province: "West Bengal",
+    region: "East",
     farmer: "Anan Hillside",
     farmerRating: 4.9,
     investmentGoal: 50000,
@@ -163,9 +163,9 @@ const allProjects = [
     id: "7",
     title: "Mushroom Cultivation Facility",
     category: "Vegetables",
-    location: "Bangkok, Thailand",
-    province: "Bangkok",
-    region: "Central",
+    location: "Mumbai, India",
+    province: "Maharashtra",
+    region: "West",
     farmer: "Siriporn Mushroom",
     farmerRating: 4.4,
     investmentGoal: 20000,
@@ -187,9 +187,9 @@ const allProjects = [
     id: "8",
     title: "Dragon Fruit Orchard Expansion",
     category: "Fruits",
-    location: "Nakhon Pathom, Thailand",
-    province: "Nakhon Pathom",
-    region: "Central",
+    location: "Chennai, India",
+    province: "Tamil Nadu",
+    region: "South",
     farmer: "Kamon Fruitland",
     farmerRating: 4.8,
     investmentGoal: 40000,
@@ -215,10 +215,9 @@ interface ProjectFilters {
   category: string
   region: string
   riskLevel: string
-  stage: string
   investmentRange: [number, number]
   roiRange: [number, number]
-  certifications: string[]
+  // certifications: string[] // Removed
   sortBy: string
 }
 
@@ -287,9 +286,10 @@ function ProjectCard({ project, viewMode }: { project: (typeof allProjects)[0]; 
                     {project.daysRemaining} days left
                   </div>
                 </div>
-                <p className="text-gray-600 mb-4">{project.description}</p>
-                <div className="flex items-center gap-2 mb-4">
-                  <Badge variant="secondary" className="bg-gray-100 text-gray-700">
+                {/* Description and Tags moved below location */}
+                <p className="text-gray-600 mb-3 text-sm">{project.description}</p>
+                <div className="flex items-center gap-2 mb-4 flex-wrap">
+                  <Badge variant="secondary" className="bg-gray-100 text-gray-700 text-xs">
                     {project.category}
                   </Badge>
                   <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-700">
@@ -400,6 +400,23 @@ function ProjectCard({ project, viewMode }: { project: (typeof allProjects)[0]; 
           <span className="text-sm">{project.location}</span>
         </div>
 
+        {/* Description - Added for Grid View */}
+        <p className="text-gray-600 text-sm line-clamp-2">{project.description}</p>
+
+        {/* Categories and Certifications - Moved below location and description */}
+        <div className="flex items-center gap-2 flex-wrap">
+          <Badge variant="secondary" className="bg-gray-100 text-gray-700 text-xs">
+            {project.category}
+          </Badge>
+          <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-700">
+            {project.termType === "short" ? "Short Term" : "Long Term"}
+          </Badge>
+          <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-700">
+            {project.returnType === "fixed" ? "Fixed" : "Variable"}
+          </Badge>
+          {/* Optionally, add certifications here if desired for grid view */}
+        </div>
+        
         {/* Funding Progress */}
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
@@ -411,19 +428,6 @@ function ProjectCard({ project, viewMode }: { project: (typeof allProjects)[0]; 
             <span>${project.currentFunding.toLocaleString()} raised</span>
             <span>{project.daysRemaining} days left</span>
           </div>
-        </div>
-
-        {/* Categories and Certifications */}
-        <div className="flex items-center gap-2 flex-wrap">
-          <Badge variant="secondary" className="bg-gray-100 text-gray-700 text-xs">
-            {project.category}
-          </Badge>
-          <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-700">
-            {project.termType === "short" ? "Short Term" : "Long Term"}
-          </Badge>
-          <Badge variant="secondary" className="text-xs bg-gray-100 text-gray-700">
-            {project.returnType === "fixed" ? "Fixed" : "Variable"}
-          </Badge>
         </div>
 
         {/* Action Button */}
@@ -443,10 +447,9 @@ export default function ProjectsPage() {
     category: "all",
     region: "all",
     riskLevel: "all",
-    stage: "all",
     investmentRange: [0, 100000],
     roiRange: [0, 50],
-    certifications: [],
+    // certifications: [], // Removed
     sortBy: "newest",
   })
 
@@ -470,15 +473,9 @@ export default function ProjectsPage() {
       if (filters.category !== "all" && project.category !== filters.category) return false
       if (filters.region !== "all" && project.region !== filters.region) return false
       if (filters.riskLevel !== "all" && project.riskLevel !== filters.riskLevel) return false
-      if (filters.stage !== "all" && project.stage !== filters.stage) return false
       if (project.investmentGoal < filters.investmentRange[0] || project.investmentGoal > filters.investmentRange[1])
         return false
       if (project.expectedROI < filters.roiRange[0] || project.expectedROI > filters.roiRange[1]) return false
-      if (
-        filters.certifications.length > 0 &&
-        !filters.certifications.some((cert) => project.certifications.includes(cert))
-      )
-        return false
       return true
     })
     .sort((a, b) => {
@@ -539,7 +536,7 @@ export default function ProjectsPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-4">Browse Agricultural Projects</h1>
-          <p className="text-muted-foreground">Discover and invest in verified farming projects across Thailand</p>
+          <p className="text-muted-foreground">Discover and invest in verified farming projects across India</p>
         </div>
 
         <div className="flex flex-col lg:flex-row gap-8">
@@ -570,244 +567,172 @@ export default function ProjectsPage() {
 
                 {/* Project Type */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block">Project Type</Label>
-                  <div className="space-y-2">
-                    {[
-                      { value: "all", label: "All Projects" },
-                      { value: "short", label: "Short Term" },
-                      { value: "long", label: "Long Term" },
-                      { value: "variable", label: "Variable Return" },
-                      { value: "fixed", label: "Fixed Return" },
-                    ].map((type) => (
-                      <div key={type.value} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={type.value}
-                          checked={filters.projectType === type.value}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, projectType: type.value }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={type.value} className="text-sm font-normal">
+                  <Label htmlFor="projectType" className="text-sm font-medium mb-2 block">Project Type</Label>
+                  <Select
+                    value={filters.projectType}
+                    onValueChange={(value) => setFilters((prev) => ({ ...prev, projectType: value }))}
+                  >
+                    <SelectTrigger id="projectType">
+                      <SelectValue placeholder="Select project type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[
+                        { value: "all", label: "All Projects" },
+                        { value: "short", label: "Short Term" },
+                        { value: "long", label: "Long Term" },
+                        { value: "variable", label: "Variable Return" },
+                        { value: "fixed", label: "Fixed Return" },
+                      ].map((type) => (
+                        <SelectItem key={type.value} value={type.value}>
                           {type.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Category */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block">Category</Label>
-                  <div className="space-y-2">
-                    {[
-                      { value: "all", label: "All Categories" },
-                      { value: "Rice", label: "Rice" },
-                      { value: "Vegetables", label: "Vegetables" },
-                      { value: "Herbs", label: "Herbs" },
-                      { value: "Corn", label: "Corn" },
-                      { value: "Wheat", label: "Wheat" },
-                      { value: "Fruits", label: "Fruits" },
-                      { value: "Specialty Crops", label: "Specialty Crops" },
-                    ].map((category) => (
-                      <div key={category.value} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={category.value}
-                          checked={filters.category === category.value}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, category: category.value }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={category.value} className="text-sm font-normal">
+                  <Label htmlFor="category" className="text-sm font-medium mb-2 block">Category</Label>
+                  <Select
+                    value={filters.category}
+                    onValueChange={(value) => setFilters((prev) => ({ ...prev, category: value }))}
+                  >
+                    <SelectTrigger id="category">
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[
+                        { value: "all", label: "All Categories" },
+                        { value: "Rice", label: "Rice" },
+                        { value: "Vegetables", label: "Vegetables" },
+                        { value: "Herbs", label: "Herbs" },
+                        { value: "Corn", label: "Corn" },
+                        { value: "Wheat", label: "Wheat" },
+                        { value: "Fruits", label: "Fruits" },
+                        { value: "Specialty Crops", label: "Specialty Crops" },
+                      ].map((category) => (
+                        <SelectItem key={category.value} value={category.value}>
                           {category.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Location */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block">Location</Label>
-                  <div className="space-y-2">
-                    {[
-                      { value: "all", label: "All Regions" },
-                      { value: "North", label: "North Thailand" },
-                      { value: "Northeast", label: "Northeast Thailand" },
-                      { value: "Central", label: "Central Thailand" },
-                      { value: "South", label: "South Thailand" },
-                    ].map((region) => (
-                      <div key={region.value} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`region-${region.value}`}
-                          checked={filters.region === region.value}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, region: region.value }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={`region-${region.value}`} className="text-sm font-normal">
+                  <Label htmlFor="region" className="text-sm font-medium mb-2 block">Location</Label>
+                  <Select
+                    value={filters.region}
+                    onValueChange={(value) => setFilters((prev) => ({ ...prev, region: value }))}
+                  >
+                    <SelectTrigger id="region">
+                      <SelectValue placeholder="Select region" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[
+                        { value: "all", label: "All Regions" },
+                        { value: "North", label: "North India" },
+                        { value: "East", label: "East India" },
+                        { value: "West", label: "West India" },
+                        { value: "South", label: "South India" },
+                        { value: "Central", label: "Central India" },
+                        { value: "Northeast", label: "Northeast India" },
+                      ].map((region) => (
+                        <SelectItem key={region.value} value={region.value}>
                           {region.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Investment Range */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block">Investment Goal Range</Label>
-                  <div className="space-y-2">
-                    {[
-                      { min: 0, max: 10000, label: "Under $10,000" },
-                      { min: 10000, max: 25000, label: "$10,000 - $25,000" },
-                      { min: 25000, max: 50000, label: "$25,000 - $50,000" },
-                      { min: 50000, max: 100000, label: "$50,000 - $100,000" },
-                      { min: 100000, max: 1000000, label: "Over $100,000" },
-                    ].map((range, index) => (
-                      <div key={index} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`investment-${index}`}
-                          checked={filters.investmentRange[0] === range.min && filters.investmentRange[1] === range.max}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, investmentRange: [range.min, range.max] }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={`investment-${index}`} className="text-sm font-normal">
+                  <Label htmlFor="investmentRange" className="text-sm font-medium mb-2 block">Investment Goal Range</Label>
+                  <Select
+                    value={`${filters.investmentRange[0]}-${filters.investmentRange[1]}`}
+                    onValueChange={(value) => {
+                      const [min, max] = value.split("-").map(Number)
+                      setFilters((prev) => ({ ...prev, investmentRange: [min, max] }))
+                    }}
+                  >
+                    <SelectTrigger id="investmentRange">
+                      <SelectValue placeholder="Select investment range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[
+                        { min: 0, max: 100000, label: "All Ranges" }, // Added "All Ranges" option
+                        { min: 0, max: 10000, label: "Under $10,000" },
+                        { min: 10000, max: 25000, label: "$10,000 - $25,000" },
+                        { min: 25000, max: 50000, label: "$25,000 - $50,000" },
+                        { min: 50000, max: 100000, label: "$50,000 - $100,000" },
+                        { min: 100000, max: 1000000, label: "Over $100,000" },
+                      ].map((range) => (
+                        <SelectItem key={`${range.min}-${range.max}`} value={`${range.min}-${range.max}`}>
                           {range.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Expected ROI */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block">Expected ROI</Label>
-                  <div className="space-y-2">
-                    {[
-                      { min: 0, max: 15, label: "Under 15%" },
-                      { min: 15, max: 25, label: "15% - 25%" },
-                      { min: 25, max: 35, label: "25% - 35%" },
-                      { min: 35, max: 50, label: "35% - 50%" },
-                      { min: 50, max: 100, label: "Over 50%" },
-                    ].map((range, index) => (
-                      <div key={index} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`roi-${index}`}
-                          checked={filters.roiRange[0] === range.min && filters.roiRange[1] === range.max}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, roiRange: [range.min, range.max] }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={`roi-${index}`} className="text-sm font-normal">
+                  <Label htmlFor="roiRange" className="text-sm font-medium mb-2 block">Expected ROI</Label>
+                  <Select
+                    value={`${filters.roiRange[0]}-${filters.roiRange[1]}`}
+                    onValueChange={(value) => {
+                      const [min, max] = value.split("-").map(Number)
+                      setFilters((prev) => ({ ...prev, roiRange: [min, max] }))
+                    }}
+                  >
+                    <SelectTrigger id="roiRange">
+                      <SelectValue placeholder="Select ROI range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[
+                        { min: 0, max: 50, label: "All ROIs" }, // Added "All ROIs" option
+                        { min: 0, max: 15, label: "Under 15%" },
+                        { min: 15, max: 25, label: "15% - 25%" },
+                        { min: 25, max: 35, label: "25% - 35%" },
+                        { min: 35, max: 50, label: "35% - 50%" },
+                        { min: 50, max: 100, label: "Over 50%" },
+                      ].map((range) => (
+                        <SelectItem key={`${range.min}-${range.max}`} value={`${range.min}-${range.max}`}>
                           {range.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 {/* Risk Level */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block">Risk Level</Label>
-                  <div className="space-y-2">
-                    {[
-                      { value: "all", label: "All Risk Levels" },
-                      { value: "Low", label: "Low Risk" },
-                      { value: "Medium", label: "Medium Risk" },
-                      { value: "High", label: "High Risk" },
-                    ].map((risk) => (
-                      <div key={risk.value} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`risk-${risk.value}`}
-                          checked={filters.riskLevel === risk.value}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, riskLevel: risk.value }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={`risk-${risk.value}`} className="text-sm font-normal">
+                  <Label htmlFor="riskLevel" className="text-sm font-medium mb-2 block">Risk Level</Label>
+                  <Select
+                    value={filters.riskLevel}
+                    onValueChange={(value) => setFilters((prev) => ({ ...prev, riskLevel: value }))}
+                  >
+                    <SelectTrigger id="riskLevel">
+                      <SelectValue placeholder="Select risk level" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {[
+                        { value: "all", label: "All Risk Levels" },
+                        { value: "Low", label: "Low Risk" },
+                        { value: "Medium", label: "Medium Risk" },
+                        { value: "High", label: "High Risk" },
+                      ].map((risk) => (
+                        <SelectItem key={risk.value} value={risk.value}>
                           {risk.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                {/* Project Status */}
-                <div>
-                  <Label className="text-sm font-medium mb-3 block">Project Status</Label>
-                  <div className="space-y-2">
-                    {[
-                      { value: "all", label: "All Statuses" },
-                      { value: "funding", label: "Funding" },
-                      { value: "active", label: "Active" },
-                      { value: "harvesting", label: "Harvesting" },
-                    ].map((status) => (
-                      <div key={status.value} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`status-${status.value}`}
-                          checked={filters.stage === status.value}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, stage: status.value }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={`status-${status.value}`} className="text-sm font-normal">
-                          {status.label}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Certifications */}
-                <div>
-                  <Label className="text-sm font-medium mb-3 block">Certifications</Label>
-                  <div className="space-y-2">
-                    {[
-                      "Organic",
-                      "Fair Trade",
-                      "GAP",
-                      "GMP",
-                      "Hydroponic",
-                      "Medicinal Grade",
-                      "Sustainable",
-                      "Single Origin",
-                    ].map((cert) => (
-                      <div key={cert} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={`cert-${cert}`}
-                          checked={filters.certifications.includes(cert)}
-                          onCheckedChange={(checked) => {
-                            if (checked) {
-                              setFilters((prev) => ({ ...prev, certifications: [...prev.certifications, cert] }))
-                            } else {
-                              setFilters((prev) => ({
-                                ...prev,
-                                certifications: prev.certifications.filter((c) => c !== cert),
-                              }))
-                            }
-                          }}
-                        />
-                        <Label htmlFor={`cert-${cert}`} className="text-sm font-normal">
-                          {cert}
-                        </Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
                 {/* Clear Filters */}
                 <Button
@@ -820,10 +745,9 @@ export default function ProjectsPage() {
                       category: "all",
                       region: "all",
                       riskLevel: "all",
-                      stage: "all",
                       investmentRange: [0, 100000],
                       roiRange: [0, 50],
-                      certifications: [],
+                      // certifications: [], // Removed
                       sortBy: "newest",
                     })
                   }
@@ -915,3 +839,4 @@ export default function ProjectsPage() {
     </div>
   )
 }
+

@@ -43,6 +43,7 @@ const projectData = {
     avatar: "/placeholder.svg?height=100&width=100",
     verified: true,
     joinedDate: "2022-03-15",
+    description: "Somchai has been growing organic rice for over 12 years and is a certified organic farmer. He leads a small cooperative and is dedicated to sustainable farming practices.",
   },
   financial: {
     investmentGoal: 25000,
@@ -272,8 +273,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
             {/* Tabs */}
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-6">
+              <TabsList className="grid w-full grid-cols-7"> {/* Adjusted grid columns */}
                 <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="timeline">Timeline</TabsTrigger> {/* New Timeline Tab */}
                 <TabsTrigger value="farmer">Farmer</TabsTrigger>
                 <TabsTrigger value="financials">Financials</TabsTrigger>
                 <TabsTrigger value="updates">Updates</TabsTrigger>
@@ -282,48 +284,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               </TabsList>
 
               <TabsContent value="overview" className="space-y-6">
-                {/* Timeline */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Clock className="w-5 h-5" />
-                      Project Timeline
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {projectData.timeline.map((stage, index) => (
-                        <div key={index} className="flex items-start gap-4">
-                          <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                              stage.status === "completed"
-                                ? "bg-green-100 text-green-600"
-                                : stage.status === "in_progress"
-                                  ? "bg-blue-100 text-blue-600"
-                                  : "bg-gray-100 text-gray-400"
-                            }`}
-                          >
-                            {stage.status === "completed" ? (
-                              <CheckCircle className="w-4 h-4" />
-                            ) : stage.status === "in_progress" ? (
-                              <Clock className="w-4 h-4" />
-                            ) : (
-                              <span className="text-xs font-medium">{index + 1}</span>
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="font-medium">{stage.stage}</h4>
-                            <p className="text-sm text-muted-foreground">{stage.description}</p>
-                            <div className="text-xs text-muted-foreground mt-1">
-                              {stage.startDate} - {stage.endDate} ({stage.duration} days)
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
                 {/* Location */}
                 <Card>
                   <CardHeader>
@@ -450,14 +410,88 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 </Card>
               </TabsContent>
 
+              {/* New Timeline Tab Content */}
+              <TabsContent value="timeline" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <Clock className="w-6 h-6" />
+                      Project Timeline
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="relative pl-6">
+
+
+                      {projectData.timeline.map((item, index) => (
+                        <div key={index} className="relative mb-8 last:mb-0">
+                          {/* Icon and Vertical Line */}
+                          <div className="absolute -left-[0.6rem] top-0 flex flex-col items-center h-full">
+                            <div
+                              className={`flex items-center justify-center w-8 h-8 rounded-full border-2 shrink-0 ${
+                                item.status === "completed"
+                                  ? "bg-green-500 border-green-500"
+                                  : "bg-background border-gray-300 dark:border-gray-700"
+                              }`}
+                            >
+                              {item.status === "completed" ? (
+                                <CheckCircle className="w-5 h-5 text-white" />
+                              ) : (
+                                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                  {index + 1}
+                                </span>
+                              )}
+                            </div>
+                            {/* Vertical line, extending from the icon */}
+                            {index < projectData.timeline.length - 1 && (
+                              <div
+                                className={`w-0.5 flex-grow ${
+                                  item.status === "completed" ? "bg-green-500" : "bg-gray-300 dark:bg-gray-700"
+                                }`}
+                              />
+                            )}
+                          </div>
+                          <div className="ml-10 pt-1"> {/* Added pt-1 to align text with icon center better */}
+                            <div className="flex items-center mb-1">
+                              <h4 className="font-semibold text-lg mr-2">{item.stage}</h4>
+                              <Badge
+                                variant={item.status === "completed" ? "default" : "outline"}
+                                className={`${
+                                  item.status === "completed"
+                                    ? "bg-green-100 text-green-700 border-green-200"
+                                    : "bg-gray-100 text-gray-600 border-gray-200"
+                                } text-xs`}
+                              >
+                                {item.status === "completed"
+                                  ? "Completed"
+                                  : item.status === "in_progress"
+                                    ? "In Progress"
+                                    : "Pending"}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground mb-1">{item.description}</p>
+                            <div className="flex items-center text-xs text-muted-foreground">
+                              <Calendar className="w-3.5 h-3.5 mr-1.5" />
+                              {/* Displaying only start date as per image */}
+                              <span>{new Date(item.startDate).toLocaleDateString()}</span>
+                              {/* Original date display: {item.startDate} - {item.endDate} ({item.duration} days) */}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
               <TabsContent value="farmer" className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Farmer Profile</CardTitle>
+                    <CardTitle>About the Farmer</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-start gap-6">
-                      <Avatar className="w-20 h-20">
+                      <Avatar className="w-24 h-24"> {/* Increased avatar size slightly */}
                         <AvatarImage src={projectData.farmer.avatar || "/placeholder.svg"} />
                         <AvatarFallback>
                           {projectData.farmer.name
@@ -466,48 +500,39 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                             .join("")}
                         </AvatarFallback>
                       </Avatar>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h3 className="text-xl font-semibold">{projectData.farmer.name}</h3>
+                      <div className="flex-1 space-y-3">
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-2xl font-semibold">{projectData.farmer.name}</h3>
+                          <div className="flex items-center gap-1 text-yellow-500">
+                            <Star className="w-5 h-5 fill-current" />
+                            <span className="font-semibold">{projectData.farmer.rating}</span>
+                          </div>
                           {projectData.farmer.verified && (
-                            <Badge variant="default" className="bg-green-600">
-                              <Shield className="w-3 h-3 mr-1" />
+                            <Badge variant="default" className="bg-green-100 text-green-700 border-green-200 ml-2">
+                              <CheckCircle className="w-3 h-3 mr-1" />
                               Verified
                             </Badge>
                           )}
                         </div>
-                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span>{projectData.farmer.rating} rating</span>
+                        <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-1.5">
+                            <Users className="w-4 h-4" />
+                            <span>{projectData.farmer.experience} years experience</span>
                           </div>
-                          <span>{projectData.farmer.experience} years experience</span>
-                          <span>Joined {projectData.farmer.joinedDate}</span>
-                        </div>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                          <div>
-                            <div className="text-lg font-semibold">{projectData.farmer.previousProjects}</div>
-                            <div className="text-sm text-muted-foreground">Previous Projects</div>
-                          </div>
-                          <div>
-                            <div className="text-lg font-semibold">{projectData.farmer.successRate}%</div>
-                            <div className="text-sm text-muted-foreground">Success Rate</div>
-                          </div>
-                          <div>
-                            <div className="text-lg font-semibold">{projectData.farmer.specialization}</div>
-                            <div className="text-sm text-muted-foreground">Specialization</div>
-                          </div>
-                          <div>
-                            <div className="text-lg font-semibold">{projectData.farmer.experience}</div>
-                            <div className="text-sm text-muted-foreground">Years Experience</div>
+                          <div className="flex items-center gap-1.5">
+                            <Target className="w-4 h-4" />
+                            <span>{projectData.farmer.previousProjects} projects completed</span>
                           </div>
                         </div>
+                        <p className="text-muted-foreground">
+                          {projectData.farmer.description || "No description available."}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card>
+                {/* <Card>
                   <CardHeader>
                     <CardTitle>Previous Projects</CardTitle>
                   </CardHeader>
@@ -533,35 +558,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                       </div>
                     </div>
                   </CardContent>
-                </Card>
+                </Card> */}
               </TabsContent>
 
               <TabsContent value="financials" className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <DollarSign className="w-5 h-5" />
-                      Budget Breakdown
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {Object.entries(projectData.budgetBreakdown).map(([category, data]) => (
-                        <div key={category} className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className="w-4 h-4 bg-primary rounded-sm"></div>
-                            <span className="capitalize">{category.replace("_", " ")}</span>
-                          </div>
-                          <div className="text-right">
-                            <div className="font-medium">${data.amount.toLocaleString()}</div>
-                            <div className="text-sm text-muted-foreground">{data.percentage}%</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -569,41 +569,63 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                       Revenue Projections
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <Label>Expected Yield</Label>
-                          <div className="text-2xl font-bold">45 tons</div>
-                        </div>
-                        <div>
-                          <Label>Market Price</Label>
-                          <div className="text-2xl font-bold">$1,200/ton</div>
-                        </div>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                      <div>
+                        <Label className="text-sm text-muted-foreground">Yield Estimate</Label>
+                        <p className="text-lg font-medium">2,500 lbs per hectare</p>
                       </div>
-                      <div className="border-t pt-4">
-                        <div className="flex justify-between items-center">
-                          <span>Total Revenue</span>
-                          <span className="text-xl font-bold">$54,000</span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span>Total Investment</span>
-                          <span className="text-xl font-bold">$25,000</span>
-                        </div>
-                        <div className="flex justify-between items-center text-green-600">
-                          <span>Expected Profit</span>
-                          <span className="text-xl font-bold">$29,000</span>
-                        </div>
-                        <div className="flex justify-between items-center text-green-600">
-                          <span>ROI</span>
-                          <span className="text-xl font-bold">18%</span>
-                        </div>
+                      <div>
+                        <Label className="text-sm text-muted-foreground">Market Price</Label>
+                        <p className="text-lg font-medium">$6.50 per lb (Fair Trade Organic)</p>
+                      </div>
+                      <div>
+                        <Label className="text-sm text-muted-foreground">Revenue Projection</Label>
+                        <p className="text-lg font-medium text-green-600">$22,500</p>
+                      </div>
+                      <div>
+                        <Label className="text-sm text-muted-foreground">Profit Margin</Label>
+                        <p className="text-lg font-medium text-green-600">35%</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
                 <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                      <DollarSign className="w-5 h-5" />
+                      Cost Breakdown
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Seeds & Materials</span>
+                      <span className="font-medium">$2,000</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Labor</span>
+                      <span className="font-medium">$8,000</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Equipment</span>
+                      <span className="font-medium">$3,000</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-muted-foreground">Other Costs</span>
+                      <span className="font-medium">$2,000</span>
+                    </div>
+                    <div className="border-t my-3"></div>
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold">Total Costs</span>
+                      <span className="font-semibold text-lg">$15,000</span>
+                    </div>
+                  </CardContent>
+                </Card>
+
+          
+
+                {/* <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <AlertTriangle className="w-5 h-5" />
@@ -636,7 +658,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                       </div>
                     </div>
                   </CardContent>
-                </Card>
+                </Card> */}
               </TabsContent>
 
               <TabsContent value="updates" className="space-y-6">
@@ -755,7 +777,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
           {/* Investment Panel */}
           <div className="space-y-6">
-            <Card className="sticky top-8">
+            <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <DollarSign className="w-5 h-5" />
@@ -800,29 +822,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     placeholder={`Min: $${projectData.financial.minimumInvestment}`}
                     min={projectData.financial.minimumInvestment}
                   />
-                  <div className="text-sm text-muted-foreground">
-                    Minimum investment: ${projectData.financial.minimumInvestment} RLUSD
-                  </div>
+
                 </div>
 
-                {/* Projected Returns */}
-                <div className="p-4 bg-green-50 rounded-lg">
-                  <h4 className="font-medium mb-2">Projected Returns</h4>
-                  <div className="space-y-1 text-sm">
-                    <div className="flex justify-between">
-                      <span>Investment:</span>
-                      <span>$1,000 RLUSD</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Expected Return:</span>
-                      <span className="text-green-600 font-medium">$1,180 RLUSD</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Profit:</span>
-                      <span className="text-green-600 font-medium">$180 RLUSD</span>
-                    </div>
-                  </div>
-                </div>
+              
 
                 {/* Investment Button */}
                 <Button className="w-full" size="lg">
