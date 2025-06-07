@@ -3,9 +3,11 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import Header from "@/components/header"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Label } from "@/components/ui/label"
 import { Leaf, ArrowLeft, CheckCircle, Shield } from "lucide-react"
 
 // Mock settlement report data
@@ -66,40 +68,21 @@ export default function SettlementReportPage({ params }: { params: { id: string 
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center space-x-2">
-                <Leaf className="h-8 w-8 text-green-600" />
-                <span className="font-bold text-xl">Agri-Trust</span>
-              </Link>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/projects" className="text-foreground/80 hover:text-foreground">
-                Browse Projects
-              </Link>
-              <Link href="/investor" className="text-foreground/80 hover:text-foreground">
-                Investor Dashboard
-              </Link>
-              <Link href="/how-it-works" className="text-foreground/80 hover:text-foreground">
-                How It Works
-              </Link>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" asChild>
-                <Link href="/investor/settlements">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Settlements
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header
+        title="Agri-Trust"
+        navLinks={[
+          { href: "/projects", label: "Browse Projects" },
+          { href: "/investor", label: "Investor Dashboard" },
+          { href: "/how-it-works", label: "How It Works" },
+        ]}
+      >
+        <Button variant="outline" asChild>
+          <Link href="/investor/settlements">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Settlements
+          </Link>
+        </Button>
+      </Header>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
@@ -318,4 +301,75 @@ export default function SettlementReportPage({ params }: { params: { id: string 
                           <div>
                             <span className="text-muted-foreground">Sale Amount:</span> $
                             {settlementReport.verificationDetails.saleAmount.toLocaleString()} RLUSD
-                          \
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="transactions" className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Transaction Details</CardTitle>
+                    <CardDescription>On-chain transaction records</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4 text-sm">
+                      <div>
+                        <Label className="font-medium">Investment Transaction Hash:</Label>
+                        <p className="font-mono text-xs bg-muted p-2 rounded mt-1 break-all">
+                          {settlementReport.investmentDetails.investmentTxHash}
+                        </p>
+                        <Button variant="link" size="sm" asChild className="px-0">
+                          <Link href="#" target="_blank" rel="noopener noreferrer">
+                            View on XRPL Explorer
+                          </Link>
+                        </Button>
+                      </div>
+                      <div>
+                        <Label className="font-medium">Return Distribution Transaction Hash:</Label>
+                        <p className="font-mono text-xs bg-muted p-2 rounded mt-1 break-all">
+                          {settlementReport.yourReturns.returnTxHash}
+                        </p>
+                        <Button variant="link" size="sm" asChild className="px-0">
+                          <Link href="#" target="_blank" rel="noopener noreferrer">
+                            View on XRPL Explorer
+                          </Link>
+                        </Button>
+                      </div>
+                      <div>
+                        <Label className="font-medium">Verification Transaction Hash:</Label>
+                        <p className="font-mono text-xs bg-muted p-2 rounded mt-1 break-all">
+                          {settlementReport.verificationDetails.verificationTxHash}
+                        </p>
+                        <Button variant="link" size="sm" asChild className="px-0">
+                          <Link href="#" target="_blank" rel="noopener noreferrer">
+                            View on XRPL Explorer
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Sidebar - Optional, can be added if there's content for it */}
+          {/* <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Project Snapshot</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">Details about the project.</p>
+              </CardContent>
+            </Card>
+          </div> */}
+        </div>
+      </div>
+    </div>
+  )
+}

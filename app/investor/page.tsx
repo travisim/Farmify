@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -624,60 +625,41 @@ export default function InvestorDashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center space-x-2">
-                <Leaf className="h-8 w-8 text-green-600" />
-                <span className="font-bold text-xl">Agri-Trust</span>
-              </Link>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/projects" className="text-foreground/80 hover:text-foreground">
-                Browse Projects
-              </Link>
-              <Link href="/investor" className="text-foreground font-medium">
-                Investor Dashboard
-              </Link>
-              <Link href="/how-it-works" className="text-foreground/80 hover:text-foreground">
-                How It Works
-              </Link>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm">
-                <Bell className="w-4 h-4 mr-2" />
-                Notifications
-              </Button>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Avatar className="cursor-pointer">
-                    <AvatarImage src={investorData.profile.avatar || "/placeholder.svg"} />
-                    <AvatarFallback>
-                      {investorData.profile.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Settings</DropdownMenuItem>
-                  <DropdownMenuItem>Wallet</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Log out</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header
+        title="Agri-Trust"
+        navLinks={[
+          { href: "/projects", label: "Browse Projects" },
+          { href: "/investor", label: "Investor Dashboard", isPrimary: true },
+          { href: "/how-it-works", label: "How It Works" },
+        ]}
+      >
+        <Button variant="outline" size="sm">
+          <Bell className="w-4 h-4 mr-2" />
+          Notifications
+        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar className="cursor-pointer">
+              <AvatarImage src={investorData.profile.avatar || "/placeholder.svg"} />
+              <AvatarFallback>
+                {investorData.profile.name
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuItem>Wallet</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>Log out</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </Header>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}

@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import Header from "@/components/header"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -88,27 +89,14 @@ export default function VerificationPage({ params }: { params: { id: string } })
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/admin" className="flex items-center space-x-2">
-                <Leaf className="h-8 w-8 text-green-600" />
-                <span className="font-bold text-xl">Agri-Trust Admin</span>
-              </Link>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" asChild>
-                <Link href="/admin">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Dashboard
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header title="Agri-Trust Admin">
+        <Button variant="outline" asChild>
+          <Link href="/admin">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Dashboard
+          </Link>
+        </Button>
+      </Header>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}

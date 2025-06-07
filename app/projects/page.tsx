@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import Header from "@/components/header"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -497,40 +498,21 @@ export default function ProjectsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center space-x-2">
-                <Leaf className="h-8 w-8 text-green-600" />
-                <span className="font-bold text-xl">Agri-Trust</span>
-              </Link>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-8">
-              <Link href="/projects" className="text-foreground font-medium">
-                Browse Projects
-              </Link>
-              <Link href="/how-it-works" className="text-foreground/80 hover:text-foreground">
-                How It Works
-              </Link>
-              <Link href="/about" className="text-foreground/80 hover:text-foreground">
-                About
-              </Link>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" asChild>
-                <Link href="/investor">Investor</Link>
-              </Button>
-              <Button asChild>
-                <Link href="/farmer">Start Farming</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Header
+        title="Agri-Trust"
+        navLinks={[
+          { href: "/projects", label: "Browse Projects", isPrimary: true },
+          { href: "/how-it-works", label: "How It Works" },
+          { href: "/about", label: "About" },
+        ]}
+      >
+        <Button variant="outline" asChild>
+          <Link href="/investor">Investor</Link>
+        </Button>
+        <Button asChild>
+          <Link href="/farmer">Start Farming</Link>
+        </Button>
+      </Header>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
