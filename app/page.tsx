@@ -1,12 +1,22 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { TrendingUp, Users, Target, Award, MapPin, DollarSign, Leaf, Wheat, Sprout } from "lucide-react"
-import Header from "@/components/header"
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  TrendingUp,
+  Users,
+  Target,
+  Award,
+  MapPin,
+  DollarSign,
+  Leaf,
+  Wheat,
+  Sprout,
+} from "lucide-react";
+import Header from "@/components/header";
 
 // Mock data for featured projects
 const featuredProjects = [
@@ -26,7 +36,8 @@ const featuredProjects = [
     riskLevel: "Medium",
     image: "/placeholder.svg?height=200&width=300",
     certifications: ["Organic", "Fair Trade"],
-    description: "Premium organic jasmine rice cultivation with sustainable farming practices",
+    description:
+      "Premium organic jasmine rice cultivation with sustainable farming practices",
   },
   {
     id: "2",
@@ -44,7 +55,8 @@ const featuredProjects = [
     riskLevel: "Low",
     image: "/placeholder.svg?height=200&width=300",
     certifications: ["GAP", "Hydroponic"],
-    description: "Year-round hydroponic tomato production using advanced greenhouse technology",
+    description:
+      "Year-round hydroponic tomato production using advanced greenhouse technology",
   },
   {
     id: "3",
@@ -62,7 +74,8 @@ const featuredProjects = [
     riskLevel: "High",
     image: "/placeholder.svg?height=200&width=300",
     certifications: ["Organic", "Medicinal Grade"],
-    description: "High-value medicinal herbs for pharmaceutical and wellness markets",
+    description:
+      "High-value medicinal herbs for pharmaceutical and wellness markets",
   },
   {
     id: "4",
@@ -80,7 +93,8 @@ const featuredProjects = [
     riskLevel: "Medium",
     image: "/placeholder.svg?height=200&width=300",
     certifications: ["GMP", "Global GAP"],
-    description: "Large-scale sweet corn production using modern farming techniques",
+    description:
+      "Large-scale sweet corn production using modern farming techniques",
   },
   {
     id: "5",
@@ -98,7 +112,8 @@ const featuredProjects = [
     riskLevel: "Medium",
     image: "/placeholder.svg?height=200&width=300",
     certifications: ["Organic", "Sustainable"],
-    description: "Sustainable wheat farming with organic practices and modern storage",
+    description:
+      "Sustainable wheat farming with organic practices and modern storage",
   },
   {
     id: "6",
@@ -116,9 +131,10 @@ const featuredProjects = [
     riskLevel: "Medium",
     image: "/placeholder.svg?height=200&width=300",
     certifications: ["Organic", "Single Origin"],
-    description: "High-altitude premium coffee beans with direct trade partnerships",
+    description:
+      "High-altitude premium coffee beans with direct trade partnerships",
   },
-]
+];
 
 // Mock platform statistics
 const platformStats = {
@@ -128,7 +144,7 @@ const platformStats = {
   averageROI: 22.5,
   totalInvestors: 1250,
   totalFarmers: 340,
-}
+};
 
 // Recent activity mock data
 const recentActivity = [
@@ -156,11 +172,14 @@ const recentActivity = [
     timestamp: "5 hours ago",
     icon: TrendingUp,
   },
-]
+];
 
 function ProjectCard({ project }: { project: (typeof featuredProjects)[0] }) {
-  const fundingPercentage = (project.currentFunding / project.investmentGoal) * 100
-  const investorCount = Math.floor(project.currentFunding / project.minimumInvestment)
+  const fundingPercentage =
+    (project.currentFunding / project.investmentGoal) * 100;
+  const investorCount = Math.floor(
+    project.currentFunding / project.minimumInvestment
+  );
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-white rounded-2xl border-0 shadow-sm">
@@ -185,8 +204,8 @@ function ProjectCard({ project }: { project: (typeof featuredProjects)[0] }) {
               project.riskLevel === "Low"
                 ? "bg-green-100 text-green-800 border-green-200"
                 : project.riskLevel === "Medium"
-                  ? "bg-orange-100 text-orange-800 border-orange-200"
-                  : "bg-red-100 text-red-800 border-red-200"
+                ? "bg-orange-100 text-orange-800 border-orange-200"
+                : "bg-red-100 text-red-800 border-red-200"
             } font-medium`}
             variant="outline"
           >
@@ -215,13 +234,17 @@ function ProjectCard({ project }: { project: (typeof featuredProjects)[0] }) {
             <div className="font-medium text-gray-900">{project.farmer}</div>
             <div className="flex items-center gap-1">
               <span className="text-yellow-500 text-sm">★</span>
-              <span className="text-sm text-gray-600">{project.farmerRating}</span>
+              <span className="text-sm text-gray-600">
+                {project.farmerRating}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Project Title */}
-        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">{project.title}</h3>
+        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">
+          {project.title}
+        </h3>
 
         {/* Location */}
         <div className="flex items-center gap-1 text-gray-600">
@@ -233,7 +256,9 @@ function ProjectCard({ project }: { project: (typeof featuredProjects)[0] }) {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">Funding Progress</span>
-            <span className="font-medium text-gray-900">{Math.round(fundingPercentage)}%</span>
+            <span className="font-medium text-gray-900">
+              {Math.round(fundingPercentage)}%
+            </span>
           </div>
           <Progress value={fundingPercentage} className="h-2 bg-gray-100" />
           <div className="flex justify-between text-xs text-gray-500">
@@ -244,30 +269,40 @@ function ProjectCard({ project }: { project: (typeof featuredProjects)[0] }) {
 
         {/* Categories and Certifications */}
         <div className="flex items-center gap-2 flex-wrap">
-          <Badge variant="secondary" className="bg-gray-100 text-gray-700 text-xs">
+          <Badge
+            variant="secondary"
+            className="bg-gray-100 text-gray-700 text-xs"
+          >
             {project.category}
           </Badge>
           {project.certifications.slice(0, 2).map((cert) => (
-            <Badge key={cert} variant="outline" className="text-xs border-gray-200 text-gray-600">
+            <Badge
+              key={cert}
+              variant="outline"
+              className="text-xs border-gray-200 text-gray-600"
+            >
               {cert}
             </Badge>
           ))}
         </div>
 
         {/* Action Button */}
-        <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium">
+        <Button
+          asChild
+          className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium"
+        >
           <Link href={`/projects/${project.id}`}>View Details</Link>
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Header
-        title="Agri-Trust"
+        title="AgriVest"
         navLinks={[
           { href: "/projects", label: "Browse Projects" },
           { href: "/how-it-works", label: "How It Works" },
@@ -290,8 +325,9 @@ export default function HomePage() {
             <span className="text-green-600 block">Innovation</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            Fund farming projects directly on XRPL with RLUSD for stable, transparent investments. Support sustainable
-            agriculture while earning competitive returns.
+            Fund farming projects directly on XRPL with RLUSD for stable,
+            transparent investments. Support sustainable agriculture while
+            earning competitive returns.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
@@ -315,26 +351,44 @@ export default function HomePage() {
               <div className="text-3xl font-bold text-green-600">
                 ${(platformStats.totalInvestments / 1000000).toFixed(1)}M
               </div>
-              <div className="text-sm text-muted-foreground">Total Investments</div>
+              <div className="text-sm text-muted-foreground">
+                Total Investments
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600">{platformStats.activeProjects}</div>
-              <div className="text-sm text-muted-foreground">Active Projects</div>
+              <div className="text-3xl font-bold text-blue-600">
+                {platformStats.activeProjects}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Active Projects
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-orange-600">{platformStats.successfulHarvests}</div>
-              <div className="text-sm text-muted-foreground">Successful Harvests</div>
+              <div className="text-3xl font-bold text-orange-600">
+                {platformStats.successfulHarvests}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Successful Harvests
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-purple-600">{platformStats.averageROI}%</div>
+              <div className="text-3xl font-bold text-purple-600">
+                {platformStats.averageROI}%
+              </div>
               <div className="text-sm text-muted-foreground">Average ROI</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-red-600">{platformStats.totalInvestors.toLocaleString()}</div>
-              <div className="text-sm text-muted-foreground">Total Investors</div>
+              <div className="text-3xl font-bold text-red-600">
+                {platformStats.totalInvestors.toLocaleString()}
+              </div>
+              <div className="text-sm text-muted-foreground">
+                Total Investors
+              </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-teal-600">{platformStats.totalFarmers}</div>
+              <div className="text-3xl font-bold text-teal-600">
+                {platformStats.totalFarmers}
+              </div>
               <div className="text-sm text-muted-foreground">Total Farmers</div>
             </div>
           </div>
@@ -347,7 +401,8 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Featured Projects</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Discover high-potential agricultural projects from verified farmers across Thailand
+              Discover high-potential agricultural projects from verified
+              farmers across Thailand
             </p>
           </div>
 
@@ -432,7 +487,8 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">How It Works</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Simple, transparent, and secure agricultural investment on the XRP Ledger
+              Simple, transparent, and secure agricultural investment on the XRP
+              Ledger
             </p>
           </div>
 
@@ -442,7 +498,9 @@ export default function HomePage() {
                 <Users className="w-8 h-8 text-green-600" />
               </div>
               <h3 className="font-semibold mb-2">Connect Wallet</h3>
-              <p className="text-sm text-muted-foreground">Connect your XRPL wallet to get started</p>
+              <p className="text-sm text-muted-foreground">
+                Connect your XRPL wallet to get started
+              </p>
             </div>
 
             <div className="text-center">
@@ -450,7 +508,9 @@ export default function HomePage() {
                 <Target className="w-8 h-8 text-blue-600" />
               </div>
               <h3 className="font-semibold mb-2">Browse Projects</h3>
-              <p className="text-sm text-muted-foreground">Explore verified farming projects</p>
+              <p className="text-sm text-muted-foreground">
+                Explore verified farming projects
+              </p>
             </div>
 
             <div className="text-center">
@@ -458,7 +518,9 @@ export default function HomePage() {
                 <DollarSign className="w-8 h-8 text-purple-600" />
               </div>
               <h3 className="font-semibold mb-2">Invest RLUSD</h3>
-              <p className="text-sm text-muted-foreground">Invest with stable RLUSD currency</p>
+              <p className="text-sm text-muted-foreground">
+                Invest with stable RLUSD currency
+              </p>
             </div>
 
             <div className="text-center">
@@ -466,7 +528,9 @@ export default function HomePage() {
                 <Wheat className="w-8 h-8 text-orange-600" />
               </div>
               <h3 className="font-semibold mb-2">Track Progress</h3>
-              <p className="text-sm text-muted-foreground">Monitor your investments transparently</p>
+              <p className="text-sm text-muted-foreground">
+                Monitor your investments transparently
+              </p>
             </div>
 
             <div className="text-center">
@@ -474,7 +538,9 @@ export default function HomePage() {
                 <TrendingUp className="w-8 h-8 text-red-600" />
               </div>
               <h3 className="font-semibold mb-2">Receive Returns</h3>
-              <p className="text-sm text-muted-foreground">Get returns in RLUSD after harvest</p>
+              <p className="text-sm text-muted-foreground">
+                Get returns in RLUSD after harvest
+              </p>
             </div>
           </div>
         </div>
@@ -485,7 +551,9 @@ export default function HomePage() {
         <div className="container mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Recent Activity</h2>
-            <p className="text-muted-foreground">Live updates from the Agri-Trust platform</p>
+            <p className="text-muted-foreground">
+              Live updates from the AgriVest platform
+            </p>
           </div>
 
           <Card className="max-w-2xl mx-auto">
@@ -498,13 +566,18 @@ export default function HomePage() {
             <CardContent>
               <div className="space-y-4">
                 {recentActivity.map((activity, index) => (
-                  <div key={index} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50">
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50"
+                  >
                     <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                       <activity.icon className="w-4 h-4 text-primary" />
                     </div>
                     <div className="flex-1">
                       <p className="text-sm">{activity.message}</p>
-                      <p className="text-xs text-muted-foreground">{activity.timestamp}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {activity.timestamp}
+                      </p>
                     </div>
                   </div>
                 ))}
@@ -517,9 +590,12 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-green-600 to-blue-600 text-white">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Agricultural Investment Journey?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Ready to Start Your Agricultural Investment Journey?
+          </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-            Join thousands of investors supporting sustainable agriculture while earning competitive returns
+            Join thousands of investors supporting sustainable agriculture while
+            earning competitive returns
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" asChild>
@@ -544,10 +620,11 @@ export default function HomePage() {
             <div>
               <div className="flex items-center space-x-2 mb-4">
                 <Leaf className="h-6 w-6 text-green-600" />
-                <span className="font-bold text-lg">Agri-Trust</span>
+                <span className="font-bold text-lg">AgriVest</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Connecting investors with sustainable agricultural projects on the XRP Ledger
+                Connecting investors with sustainable agricultural projects on
+                the XRP Ledger
               </p>
             </div>
 
@@ -626,10 +703,12 @@ export default function HomePage() {
           </div>
 
           <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 Agri-Trust. All rights reserved. Built on XRP Ledger.</p>
+            <p>
+              &copy; 2024 AgriVest. All rights reserved. Built on XRP Ledger.
+            </p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }

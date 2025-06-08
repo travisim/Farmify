@@ -1,4 +1,4 @@
-# Agri-Trust XRPL MVP - XRPL-Native Implementation Plan
+# AgriVest XRPL MVP - XRPL-Native Implementation Plan
 
 **Document Version: 4.0 (Enhanced with Detailed Project & Page Specifications)**  
 **Date: December 2024**  
@@ -16,16 +16,17 @@
 - Process investments and returns using RLUSD for price stability
 - Minimize external database dependencies
 
-## 2. Technology Stack (XRPL-Optimized)
+## 2. Technology Stack (XRPL-Optimized, with XRP EVM Sidechain)
 
 - **Frontend:** Next.js 14 with TypeScript
 - **Styling:** Tailwind CSS
 - **Backend:** Next.js API routes
-- **Primary Storage:** XRPL (NFTs, memos, account objects, transaction metadata)
-- **Transaction Currency:** RLUSD (Ripple USD stablecoin)
+- **Primary Storage:** XRPL (NFTs, memos, account objects, transaction metadata), XRP EVM Sidechain (for smart contract state)
+- **Transaction Currency:** RLUSD (Ripple USD stablecoin on XRPL and potentially wrapped on EVM)
 - **Minimal Database:** SQLite for caching and indexing only
-- **XRPL Integration:** xrpl.js library
-- **Authentication:** NextAuth.js with wallet connection
+- **XRPL Integration:** xrpl.js library (for XRPL mainnet interactions)
+- **XRP EVM Integration:** ethers.js / web3.js, Solidity, Hardhat/Truffle
+- **Authentication:** NextAuth.js with wallet connection (supporting both XRPL and EVM accounts if necessary)
 
 ## 3. Detailed Project Categories & Examples
 
@@ -1116,7 +1117,7 @@ CREATE TABLE user_cache (
 
 ### 8.1 Overview
 
-The Trusted Settlement mechanism is the cornerstone of transparency and trust in the Agri-Trust platform. After a farming project's duration ends and produce is harvested and sold, this system ensures that all profit distributions are backed by verifiable, real-world proof of revenue through a combination of IPFS document storage and XRPL immutable records.
+The Trusted Settlement mechanism is the cornerstone of transparency and trust in the AgriVest platform. After a farming project's duration ends and produce is harvested and sold, this system ensures that all profit distributions are backed by verifiable, real-world proof of revenue through a combination of IPFS document storage and XRPL immutable records.
 
 ### 8.2 Settlement Flow Architecture
 
@@ -1585,8 +1586,8 @@ client.on("transaction", (tx) => {
 1. **Project Setup & UI Framework**
 
    ```bash
-   npx create-next-app@latest agri-trust --typescript --tailwind --app
-   cd agri-trust
+   npx create-next-app@latest AgriVest --typescript --tailwind --app
+   cd AgriVest
    npm install lucide-react @radix-ui/react-dialog @radix-ui/react-tabs
    ```
 
@@ -1748,12 +1749,17 @@ client.on("transaction", (tx) => {
    - Document verification accuracy monitoring
    - Profit distribution audit systems
 
-3. **XRPL "Smart Contract" Logic**
+3. **Smart Contracts on XRP EVM Sidechain**
 
-   - Transaction validation rules
-   - Business logic enforcement
-   - Automated state transitions
-   - Error handling and recovery
+   - **Core Logic:** Implement core business logic, state management, and complex functionalities using Solidity smart contracts deployed on the XRP EVM Sidechain.
+   - **Interactions:** Utilize tools like ethers.js or web3.js to interact with deployed smart contracts from the backend (Next.js API routes).
+   - **Capabilities:** Leverage the EVM environment for:
+     - Complex computations and algorithms.
+     - Sophisticated access control mechanisms.
+     - Oracles and external data integration (via EVM patterns).
+     - Inter-contract communication.
+   - **Development Tools:** Employ standard EVM development tools such as Hardhat or Truffle for contract development, testing, and deployment.
+   - **Data Storage:** Smart contracts will manage their own state variables on the EVM sidechain. Data that needs to be on the XRPL mainnet (e.g., for NFTs linked to mainnet accounts) will require careful synchronization or bridging logic.
 
 **Deliverable:** Complete automated transaction processing with analytics
 

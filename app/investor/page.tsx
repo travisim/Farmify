@@ -1,20 +1,32 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import Header from "@/components/header"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
-import { Switch } from "@/components/ui/switch"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Header from "@/components/header";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +34,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   Leaf,
   TrendingUp,
@@ -39,11 +51,11 @@ import {
   Plus,
   Bookmark,
   MapPin,
-} from "lucide-react"
-import { InvestorPortfolioChart } from "@/components/investor/portfolio-chart"
-import { InvestorROIChart } from "@/components/investor/roi-chart"
-import { InvestorRiskChart } from "@/components/investor/risk-chart"
-import { InvestorGeographicChart } from "@/components/investor/geographic-chart"
+} from "lucide-react";
+import { InvestorPortfolioChart } from "@/components/investor/portfolio-chart";
+import { InvestorROIChart } from "@/components/investor/roi-chart";
+import { InvestorRiskChart } from "@/components/investor/risk-chart";
+import { InvestorGeographicChart } from "@/components/investor/geographic-chart";
 
 // Mock investor data
 const investorData = {
@@ -293,9 +305,21 @@ const investorData = {
       { category: "Specialty Crops", averageROI: 32.6, trend: "up" },
     ],
     seasonalTrends: [
-      { season: "Dry (Nov-Feb)", bestCrops: ["Rice", "Vegetables"], averageROI: 21.5 },
-      { season: "Hot (Mar-Jun)", bestCrops: ["Fruits", "Herbs"], averageROI: 28.3 },
-      { season: "Rainy (Jul-Oct)", bestCrops: ["Rice", "Specialty Crops"], averageROI: 24.7 },
+      {
+        season: "Dry (Nov-Feb)",
+        bestCrops: ["Rice", "Vegetables"],
+        averageROI: 21.5,
+      },
+      {
+        season: "Hot (Mar-Jun)",
+        bestCrops: ["Fruits", "Herbs"],
+        averageROI: 28.3,
+      },
+      {
+        season: "Rainy (Jul-Oct)",
+        bestCrops: ["Rice", "Specialty Crops"],
+        averageROI: 24.7,
+      },
     ],
   },
   projectUpdates: [
@@ -330,9 +354,13 @@ const investorData = {
       milestone: "Harvesting",
     },
   ],
-}
+};
 
-function InvestmentCard({ investment }: { investment: (typeof investorData.activeInvestments)[0] }) {
+function InvestmentCard({
+  investment,
+}: {
+  investment: (typeof investorData.activeInvestments)[0];
+}) {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-white rounded-2xl border-0 shadow-sm">
       <div className="relative">
@@ -356,8 +384,8 @@ function InvestmentCard({ investment }: { investment: (typeof investorData.activ
               investment.riskLevel === "Low"
                 ? "bg-green-100 text-green-800 border-green-200"
                 : investment.riskLevel === "Medium"
-                  ? "bg-orange-100 text-orange-800 border-orange-200"
-                  : "bg-red-100 text-red-800 border-red-200"
+                ? "bg-orange-100 text-orange-800 border-orange-200"
+                : "bg-red-100 text-red-800 border-red-200"
             } font-medium`}
             variant="outline"
           >
@@ -386,13 +414,17 @@ function InvestmentCard({ investment }: { investment: (typeof investorData.activ
             <div className="font-medium text-gray-900">{investment.farmer}</div>
             <div className="flex items-center gap-1">
               <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-              <span className="text-sm text-gray-600">{investment.farmerRating}</span>
+              <span className="text-sm text-gray-600">
+                {investment.farmerRating}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Project Title */}
-        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">{investment.title}</h3>
+        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">
+          {investment.title}
+        </h3>
 
         {/* Location */}
         <div className="flex items-center gap-1 text-gray-600">
@@ -404,11 +436,15 @@ function InvestmentCard({ investment }: { investment: (typeof investorData.activ
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
             <span className="text-gray-600">Expected Return</span>
-            <div className="font-semibold text-green-600">${investment.expectedReturn.toLocaleString()}</div>
+            <div className="font-semibold text-green-600">
+              ${investment.expectedReturn.toLocaleString()}
+            </div>
           </div>
           <div>
             <span className="text-gray-600">Days Remaining</span>
-            <div className="font-semibold text-gray-900">{investment.daysRemaining}</div>
+            <div className="font-semibold text-gray-900">
+              {investment.daysRemaining}
+            </div>
           </div>
         </div>
 
@@ -416,23 +452,35 @@ function InvestmentCard({ investment }: { investment: (typeof investorData.activ
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">Progress</span>
-            <span className="font-medium text-gray-900">{investment.stage}</span>
+            <span className="font-medium text-gray-900">
+              {investment.stage}
+            </span>
           </div>
           <Progress value={investment.progress} className="h-2 bg-gray-100" />
-          <div className="text-xs text-gray-500 text-center">{investment.progress}% complete</div>
+          <div className="text-xs text-gray-500 text-center">
+            {investment.progress}% complete
+          </div>
         </div>
 
         {/* Action Button */}
-        <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium">
+        <Button
+          asChild
+          className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium"
+        >
           <Link href={`/projects/${investment.id}`}>View Details</Link>
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }
 
-function WatchlistCard({ project }: { project: (typeof investorData.watchlist)[0] }) {
-  const fundingPercentage = (project.currentFunding / project.investmentGoal) * 100
+function WatchlistCard({
+  project,
+}: {
+  project: (typeof investorData.watchlist)[0];
+}) {
+  const fundingPercentage =
+    (project.currentFunding / project.investmentGoal) * 100;
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-white rounded-2xl border-0 shadow-sm">
@@ -457,8 +505,8 @@ function WatchlistCard({ project }: { project: (typeof investorData.watchlist)[0
               project.riskLevel === "Low"
                 ? "bg-green-100 text-green-800 border-green-200"
                 : project.riskLevel === "Medium"
-                  ? "bg-orange-100 text-orange-800 border-orange-200"
-                  : "bg-red-100 text-red-800 border-red-200"
+                ? "bg-orange-100 text-orange-800 border-orange-200"
+                : "bg-red-100 text-red-800 border-red-200"
             } font-medium`}
             variant="outline"
           >
@@ -487,13 +535,17 @@ function WatchlistCard({ project }: { project: (typeof investorData.watchlist)[0
             <div className="font-medium text-gray-900">{project.farmer}</div>
             <div className="flex items-center gap-1">
               <span className="text-yellow-500 text-sm">★</span>
-              <span className="text-sm text-gray-600">{project.farmerRating}</span>
+              <span className="text-sm text-gray-600">
+                {project.farmerRating}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Project Title */}
-        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">{project.title}</h3>
+        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">
+          {project.title}
+        </h3>
 
         {/* Location */}
         <div className="flex items-center gap-1 text-gray-600">
@@ -505,7 +557,9 @@ function WatchlistCard({ project }: { project: (typeof investorData.watchlist)[0
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">Funding Progress</span>
-            <span className="font-medium text-gray-900">{Math.round(fundingPercentage)}%</span>
+            <span className="font-medium text-gray-900">
+              {Math.round(fundingPercentage)}%
+            </span>
           </div>
           <Progress value={fundingPercentage} className="h-2 bg-gray-100" />
           <div className="flex justify-between text-xs text-gray-500">
@@ -519,17 +573,25 @@ function WatchlistCard({ project }: { project: (typeof investorData.watchlist)[0
           <Button variant="outline" size="sm" className="flex-1 rounded-xl">
             <Bookmark className="w-4 h-4" />
           </Button>
-          <Button asChild className="flex-1 bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium">
+          <Button
+            asChild
+            className="flex-1 bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium"
+          >
             <Link href={`/projects/${project.id}`}>Invest</Link>
           </Button>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
-function RecommendationCard({ project }: { project: (typeof investorData.projectRecommendations)[0] }) {
-  const fundingPercentage = (project.currentFunding / project.investmentGoal) * 100
+function RecommendationCard({
+  project,
+}: {
+  project: (typeof investorData.projectRecommendations)[0];
+}) {
+  const fundingPercentage =
+    (project.currentFunding / project.investmentGoal) * 100;
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-white rounded-2xl border-0 shadow-sm">
@@ -554,8 +616,8 @@ function RecommendationCard({ project }: { project: (typeof investorData.project
               project.riskLevel === "Low"
                 ? "bg-green-100 text-green-800 border-green-200"
                 : project.riskLevel === "Medium"
-                  ? "bg-orange-100 text-orange-800 border-orange-200"
-                  : "bg-red-100 text-red-800 border-red-200"
+                ? "bg-orange-100 text-orange-800 border-orange-200"
+                : "bg-red-100 text-red-800 border-red-200"
             } font-medium`}
             variant="outline"
           >
@@ -584,13 +646,17 @@ function RecommendationCard({ project }: { project: (typeof investorData.project
             <div className="font-medium text-gray-900">{project.farmer}</div>
             <div className="flex items-center gap-1">
               <span className="text-yellow-500 text-sm">★</span>
-              <span className="text-sm text-gray-600">{project.farmerRating}</span>
+              <span className="text-sm text-gray-600">
+                {project.farmerRating}
+              </span>
             </div>
           </div>
         </div>
 
         {/* Project Title */}
-        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">{project.title}</h3>
+        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">
+          {project.title}
+        </h3>
 
         {/* Location */}
         <div className="flex items-center gap-1 text-gray-600">
@@ -602,7 +668,9 @@ function RecommendationCard({ project }: { project: (typeof investorData.project
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">Funding Progress</span>
-            <span className="font-medium text-gray-900">{Math.round(fundingPercentage)}%</span>
+            <span className="font-medium text-gray-900">
+              {Math.round(fundingPercentage)}%
+            </span>
           </div>
           <Progress value={fundingPercentage} className="h-2 bg-gray-100" />
           <div className="flex justify-between text-xs text-gray-500">
@@ -612,21 +680,24 @@ function RecommendationCard({ project }: { project: (typeof investorData.project
         </div>
 
         {/* Action Button */}
-        <Button asChild className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium">
+        <Button
+          asChild
+          className="w-full bg-green-600 hover:bg-green-700 text-white rounded-xl font-medium"
+        >
           <Link href={`/projects/${project.id}`}>View Details</Link>
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default function InvestorDashboard() {
-  const [activeTab, setActiveTab] = useState("overview")
+  const [activeTab, setActiveTab] = useState("overview");
 
   return (
     <div className="min-h-screen bg-background">
       <Header
-        title="Agri-Trust"
+        title="AgriVest"
         navLinks={[
           { href: "/projects", label: "Browse Projects" },
           { href: "/investor", label: "Investor Dashboard", isPrimary: true },
@@ -640,7 +711,9 @@ export default function InvestorDashboard() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src={investorData.profile.avatar || "/placeholder.svg"} />
+              <AvatarImage
+                src={investorData.profile.avatar || "/placeholder.svg"}
+              />
               <AvatarFallback>
                 {investorData.profile.name
                   .split(" ")
@@ -666,7 +739,9 @@ export default function InvestorDashboard() {
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-3xl font-bold mb-2">Investor Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back, {investorData.profile.name}</p>
+            <p className="text-muted-foreground">
+              Welcome back, {investorData.profile.name}
+            </p>
           </div>
           <Button asChild>
             <Link href="/projects">
@@ -676,7 +751,11 @@ export default function InvestorDashboard() {
           </Button>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="space-y-8"
+        >
           <TabsList className="grid w-full grid-cols-5 max-w-2xl">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="portfolio">Portfolio</TabsTrigger>
@@ -690,53 +769,73 @@ export default function InvestorDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Invested</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Invested
+                  </CardTitle>
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    ${investorData.portfolioSummary.totalInvested.toLocaleString()}
+                    $
+                    {investorData.portfolioSummary.totalInvested.toLocaleString()}
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    RLUSD across {investorData.portfolioSummary.activeInvestments} projects
+                    RLUSD across{" "}
+                    {investorData.portfolioSummary.activeInvestments} projects
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Returns Received</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Returns Received
+                  </CardTitle>
                   <TrendingUp className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    ${investorData.portfolioSummary.returnsReceived.toLocaleString()}
+                    $
+                    {investorData.portfolioSummary.returnsReceived.toLocaleString()}
                   </div>
-                  <p className="text-xs text-muted-foreground">Total returns to date</p>
+                  <p className="text-xs text-muted-foreground">
+                    Total returns to date
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Portfolio ROI</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Portfolio ROI
+                  </CardTitle>
                   <PieChart className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{investorData.portfolioSummary.portfolioROI}%</div>
-                  <p className="text-xs text-muted-foreground">Average return on investment</p>
+                  <div className="text-2xl font-bold">
+                    {investorData.portfolioSummary.portfolioROI}%
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Average return on investment
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Pending Returns</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Pending Returns
+                  </CardTitle>
                   <Clock className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    ${investorData.portfolioSummary.pendingReturns.toLocaleString()}
+                    $
+                    {investorData.portfolioSummary.pendingReturns.toLocaleString()}
                   </div>
-                  <p className="text-xs text-muted-foreground">Expected future returns</p>
+                  <p className="text-xs text-muted-foreground">
+                    Expected future returns
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -759,7 +858,9 @@ export default function InvestorDashboard() {
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
                   <CardTitle>Active Investments</CardTitle>
-                  <CardDescription>Your current agricultural investments</CardDescription>
+                  <CardDescription>
+                    Your current agricultural investments
+                  </CardDescription>
                 </div>
                 <Button variant="outline" size="sm">
                   <Eye className="w-4 h-4 mr-2" />
@@ -769,7 +870,10 @@ export default function InvestorDashboard() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {investorData.activeInvestments.map((investment) => (
-                    <InvestmentCard key={investment.id} investment={investment} />
+                    <InvestmentCard
+                      key={investment.id}
+                      investment={investment}
+                    />
                   ))}
                 </div>
               </CardContent>
@@ -780,7 +884,9 @@ export default function InvestorDashboard() {
               <Card>
                 <CardHeader>
                   <CardTitle>Investment by Category</CardTitle>
-                  <CardDescription>Distribution across crop types</CardDescription>
+                  <CardDescription>
+                    Distribution across crop types
+                  </CardDescription>
                 </CardHeader>
                 <CardContent className="h-64">
                   <InvestorROIChart />
@@ -827,21 +933,26 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Recent Activity</CardTitle>
-                <CardDescription>Latest updates from your investments</CardDescription>
+                <CardDescription>
+                  Latest updates from your investments
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {investorData.recentActivity.map((activity, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50">
+                    <div
+                      key={index}
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50"
+                    >
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                           activity.type === "investment"
                             ? "bg-blue-100 text-blue-600"
                             : activity.type === "return"
-                              ? "bg-green-100 text-green-600"
-                              : activity.type === "update"
-                                ? "bg-purple-100 text-purple-600"
-                                : "bg-orange-100 text-orange-600"
+                            ? "bg-green-100 text-green-600"
+                            : activity.type === "update"
+                            ? "bg-purple-100 text-purple-600"
+                            : "bg-orange-100 text-orange-600"
                         }`}
                       >
                         {activity.type === "investment" ? (
@@ -856,7 +967,9 @@ export default function InvestorDashboard() {
                       </div>
                       <div className="flex-1">
                         <p className="text-sm">{activity.message}</p>
-                        <p className="text-xs text-muted-foreground">{activity.timestamp}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {activity.timestamp}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -885,7 +998,9 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Active Investments</CardTitle>
-                <CardDescription>Currently funded agricultural projects</CardDescription>
+                <CardDescription>
+                  Currently funded agricultural projects
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -893,16 +1008,20 @@ export default function InvestorDashboard() {
                     <div key={investment.id} className="border rounded-lg p-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="text-lg font-semibold">{investment.title}</h3>
+                          <h3 className="text-lg font-semibold">
+                            {investment.title}
+                          </h3>
                           <div className="flex items-center gap-2 mt-1">
-                            <Badge variant="outline">{investment.category}</Badge>
+                            <Badge variant="outline">
+                              {investment.category}
+                            </Badge>
                             <Badge
                               variant={
                                 investment.riskLevel === "Low"
                                   ? "default"
                                   : investment.riskLevel === "Medium"
-                                    ? "secondary"
-                                    : "destructive"
+                                  ? "secondary"
+                                  : "destructive"
                               }
                             >
                               {investment.riskLevel} Risk
@@ -910,39 +1029,63 @@ export default function InvestorDashboard() {
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-green-600">{investment.expectedROI}%</div>
-                          <div className="text-sm text-muted-foreground">Expected ROI</div>
+                          <div className="text-2xl font-bold text-green-600">
+                            {investment.expectedROI}%
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            Expected ROI
+                          </div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
-                          <Label className="text-sm font-medium">Your Investment</Label>
+                          <Label className="text-sm font-medium">
+                            Your Investment
+                          </Label>
                           <div className="mt-2">
-                            <div className="text-xl font-bold">${investment.investmentAmount} RLUSD</div>
-                            <div className="text-xs text-muted-foreground">Invested on {investment.investmentDate}</div>
-                          </div>
-                        </div>
-
-                        <div>
-                          <Label className="text-sm font-medium">Expected Return</Label>
-                          <div className="mt-2">
-                            <div className="text-xl font-bold text-green-600">${investment.expectedReturn} RLUSD</div>
+                            <div className="text-xl font-bold">
+                              ${investment.investmentAmount} RLUSD
+                            </div>
                             <div className="text-xs text-muted-foreground">
-                              Profit: ${investment.expectedReturn - investment.investmentAmount} RLUSD
+                              Invested on {investment.investmentDate}
                             </div>
                           </div>
                         </div>
 
                         <div>
-                          <Label className="text-sm font-medium">Project Progress</Label>
+                          <Label className="text-sm font-medium">
+                            Expected Return
+                          </Label>
                           <div className="mt-2">
-                            <Progress value={investment.progress} className="h-2" />
+                            <div className="text-xl font-bold text-green-600">
+                              ${investment.expectedReturn} RLUSD
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              Profit: $
+                              {investment.expectedReturn -
+                                investment.investmentAmount}{" "}
+                              RLUSD
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <Label className="text-sm font-medium">
+                            Project Progress
+                          </Label>
+                          <div className="mt-2">
+                            <Progress
+                              value={investment.progress}
+                              className="h-2"
+                            />
                             <div className="flex justify-between text-xs text-muted-foreground mt-1">
                               <span>
                                 {investment.stage} ({investment.progress}%)
                               </span>
-                              <span>{investment.daysRemaining} days remaining</span>
+                              <span>
+                                {investment.daysRemaining} days remaining
+                              </span>
                             </div>
                           </div>
                         </div>
@@ -950,7 +1093,9 @@ export default function InvestorDashboard() {
 
                       <div className="flex justify-end mt-4">
                         <Button asChild size="sm">
-                          <Link href={`/projects/${investment.id}`}>View Details</Link>
+                          <Link href={`/projects/${investment.id}`}>
+                            View Details
+                          </Link>
                         </Button>
                       </div>
                     </div>
@@ -963,7 +1108,9 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Investment History</CardTitle>
-                <CardDescription>Completed investments and returns</CardDescription>
+                <CardDescription>
+                  Completed investments and returns
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -973,27 +1120,41 @@ export default function InvestorDashboard() {
                         <div>
                           <h4 className="font-medium">{investment.title}</h4>
                           <p className="text-sm text-muted-foreground">
-                            {investment.investmentDate} to {investment.completionDate}
+                            {investment.investmentDate} to{" "}
+                            {investment.completionDate}
                           </p>
                         </div>
                         <div className="text-right">
                           <Badge variant="default">Completed</Badge>
-                          <div className="text-sm text-green-600 mt-1">+{investment.actualROI}% ROI</div>
+                          <div className="text-sm text-green-600 mt-1">
+                            +{investment.actualROI}% ROI
+                          </div>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4 text-sm">
                         <div>
-                          <span className="text-muted-foreground">Invested:</span> ${investment.investmentAmount} RLUSD
+                          <span className="text-muted-foreground">
+                            Invested:
+                          </span>{" "}
+                          ${investment.investmentAmount} RLUSD
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Returned:</span> ${investment.returnAmount} RLUSD
+                          <span className="text-muted-foreground">
+                            Returned:
+                          </span>{" "}
+                          ${investment.returnAmount} RLUSD
                         </div>
                         <div>
                           <span className="text-muted-foreground">Profit:</span>{" "}
-                          <span className="text-green-600">${investment.profit} RLUSD</span>
+                          <span className="text-green-600">
+                            ${investment.profit} RLUSD
+                          </span>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Projected ROI:</span> {investment.projectedROI}%
+                          <span className="text-muted-foreground">
+                            Projected ROI:
+                          </span>{" "}
+                          {investment.projectedROI}%
                         </div>
                       </div>
                     </div>
@@ -1025,7 +1186,9 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Personalized Recommendations</CardTitle>
-                <CardDescription>Projects that match your investment profile</CardDescription>
+                <CardDescription>
+                  Projects that match your investment profile
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1040,56 +1203,79 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Market Analysis</CardTitle>
-                <CardDescription>Agricultural investment trends and opportunities</CardDescription>
+                <CardDescription>
+                  Agricultural investment trends and opportunities
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-lg font-medium mb-4">Category Performance</h3>
+                    <h3 className="text-lg font-medium mb-4">
+                      Category Performance
+                    </h3>
                     <div className="space-y-4">
-                      {investorData.marketAnalysis.categoryPerformance.map((category, index) => (
-                        <div key={index} className="flex items-center justify-between">
-                          <div className="flex items-center gap-3">
-                            <div className="w-4 h-4 bg-primary rounded-sm"></div>
-                            <span>{category.category}</span>
+                      {investorData.marketAnalysis.categoryPerformance.map(
+                        (category, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-4 h-4 bg-primary rounded-sm"></div>
+                              <span>{category.category}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-medium">
+                                {category.averageROI}% Avg. ROI
+                              </span>
+                              {category.trend === "up" ? (
+                                <TrendingUp className="w-4 h-4 text-green-600" />
+                              ) : (
+                                <div className="w-4 h-4 text-blue-600">—</div>
+                              )}
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium">{category.averageROI}% Avg. ROI</span>
-                            {category.trend === "up" ? (
-                              <TrendingUp className="w-4 h-4 text-green-600" />
-                            ) : (
-                              <div className="w-4 h-4 text-blue-600">—</div>
-                            )}
-                          </div>
-                        </div>
-                      ))}
+                        )
+                      )}
                     </div>
                   </div>
 
                   <div className="border-t pt-6">
-                    <h3 className="text-lg font-medium mb-4">Seasonal Trends</h3>
+                    <h3 className="text-lg font-medium mb-4">
+                      Seasonal Trends
+                    </h3>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      {investorData.marketAnalysis.seasonalTrends.map((season, index) => (
-                        <Card key={index}>
-                          <CardHeader className="pb-2">
-                            <CardTitle className="text-base">{season.season}</CardTitle>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="text-2xl font-bold text-green-600">{season.averageROI}%</div>
-                            <div className="text-sm text-muted-foreground">Average ROI</div>
-                            <div className="mt-2">
-                              <div className="text-sm font-medium">Best Crops:</div>
-                              <div className="flex flex-wrap gap-1 mt-1">
-                                {season.bestCrops.map((crop) => (
-                                  <Badge key={crop} variant="outline">
-                                    {crop}
-                                  </Badge>
-                                ))}
+                      {investorData.marketAnalysis.seasonalTrends.map(
+                        (season, index) => (
+                          <Card key={index}>
+                            <CardHeader className="pb-2">
+                              <CardTitle className="text-base">
+                                {season.season}
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="text-2xl font-bold text-green-600">
+                                {season.averageROI}%
                               </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      ))}
+                              <div className="text-sm text-muted-foreground">
+                                Average ROI
+                              </div>
+                              <div className="mt-2">
+                                <div className="text-sm font-medium">
+                                  Best Crops:
+                                </div>
+                                <div className="flex flex-wrap gap-1 mt-1">
+                                  {season.bestCrops.map((crop) => (
+                                    <Badge key={crop} variant="outline">
+                                      {crop}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )
+                      )}
                     </div>
                   </div>
                 </div>
@@ -1100,13 +1286,20 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Investment Strategy</CardTitle>
-                <CardDescription>Optimize your agricultural portfolio</CardDescription>
+                <CardDescription>
+                  Optimize your agricultural portfolio
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
                   <Label>Risk Tolerance</Label>
                   <div className="mt-4 px-2">
-                    <Slider defaultValue={[50]} max={100} step={10} className="w-full" />
+                    <Slider
+                      defaultValue={[50]}
+                      max={100}
+                      step={10}
+                      className="w-full"
+                    />
                     <div className="flex justify-between text-xs text-muted-foreground mt-2">
                       <span>Conservative</span>
                       <span>Balanced</span>
@@ -1123,9 +1316,15 @@ export default function InvestorDashboard() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="short">Short Term (1-3 months)</SelectItem>
-                        <SelectItem value="medium">Medium Term (3-6 months)</SelectItem>
-                        <SelectItem value="long">Long Term (6+ months)</SelectItem>
+                        <SelectItem value="short">
+                          Short Term (1-3 months)
+                        </SelectItem>
+                        <SelectItem value="medium">
+                          Medium Term (3-6 months)
+                        </SelectItem>
+                        <SelectItem value="long">
+                          Long Term (6+ months)
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -1142,7 +1341,9 @@ export default function InvestorDashboard() {
                         <SelectItem value="vegetables">Vegetables</SelectItem>
                         <SelectItem value="herbs">Herbs</SelectItem>
                         <SelectItem value="fruits">Fruits</SelectItem>
-                        <SelectItem value="specialty">Specialty Crops</SelectItem>
+                        <SelectItem value="specialty">
+                          Specialty Crops
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -1151,14 +1352,21 @@ export default function InvestorDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Label>Monthly Investment Budget</Label>
-                    <Input type="number" placeholder="RLUSD amount" className="mt-2" defaultValue="1000" />
+                    <Input
+                      type="number"
+                      placeholder="RLUSD amount"
+                      className="mt-2"
+                      defaultValue="1000"
+                    />
                   </div>
 
                   <div>
                     <Label>Auto-Reinvest Returns</Label>
                     <div className="flex items-center gap-2 mt-4">
                       <Switch id="auto-reinvest" />
-                      <Label htmlFor="auto-reinvest">Enable automatic reinvestment</Label>
+                      <Label htmlFor="auto-reinvest">
+                        Enable automatic reinvestment
+                      </Label>
                     </div>
                   </div>
                 </div>
@@ -1175,7 +1383,9 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Recent Updates</CardTitle>
-                <CardDescription>Latest news from your investments</CardDescription>
+                <CardDescription>
+                  Latest news from your investments
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -1184,7 +1394,9 @@ export default function InvestorDashboard() {
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
-                            <CardTitle className="text-lg">{update.title}</CardTitle>
+                            <CardTitle className="text-lg">
+                              {update.title}
+                            </CardTitle>
                             <CardDescription>
                               {update.projectTitle} • {update.date}
                             </CardDescription>
@@ -1219,19 +1431,27 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Update Preferences</CardTitle>
-                <CardDescription>Customize how you receive project updates</CardDescription>
+                <CardDescription>
+                  Customize how you receive project updates
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-medium mb-4">Notification Settings</h3>
+                  <h3 className="text-lg font-medium mb-4">
+                    Notification Settings
+                  </h3>
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div>
-                        <Label htmlFor="milestone-updates" className="font-medium">
+                        <Label
+                          htmlFor="milestone-updates"
+                          className="font-medium"
+                        >
                           Milestone Updates
                         </Label>
                         <p className="text-sm text-muted-foreground">
-                          Receive notifications when projects reach important milestones
+                          Receive notifications when projects reach important
+                          milestones
                         </p>
                       </div>
                       <Switch id="milestone-updates" defaultChecked />
@@ -1242,14 +1462,19 @@ export default function InvestorDashboard() {
                         <Label htmlFor="weekly-updates" className="font-medium">
                           Weekly Updates
                         </Label>
-                        <p className="text-sm text-muted-foreground">Receive regular weekly progress updates</p>
+                        <p className="text-sm text-muted-foreground">
+                          Receive regular weekly progress updates
+                        </p>
                       </div>
                       <Switch id="weekly-updates" defaultChecked />
                     </div>
 
                     <div className="flex items-center justify-between">
                       <div>
-                        <Label htmlFor="return-notifications" className="font-medium">
+                        <Label
+                          htmlFor="return-notifications"
+                          className="font-medium"
+                        >
                           Return Distributions
                         </Label>
                         <p className="text-sm text-muted-foreground">
@@ -1265,7 +1490,8 @@ export default function InvestorDashboard() {
                           Risk Alerts
                         </Label>
                         <p className="text-sm text-muted-foreground">
-                          Receive notifications about potential risks to your investments
+                          Receive notifications about potential risks to your
+                          investments
                         </p>
                       </div>
                       <Switch id="risk-alerts" defaultChecked />
@@ -1274,7 +1500,9 @@ export default function InvestorDashboard() {
                 </div>
 
                 <div className="border-t pt-6">
-                  <h3 className="text-lg font-medium mb-4">Delivery Preferences</h3>
+                  <h3 className="text-lg font-medium mb-4">
+                    Delivery Preferences
+                  </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <Label>Email Frequency</Label>
@@ -1298,7 +1526,9 @@ export default function InvestorDashboard() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="all">All Updates</SelectItem>
-                          <SelectItem value="important">Important Only</SelectItem>
+                          <SelectItem value="important">
+                            Important Only
+                          </SelectItem>
                           <SelectItem value="none">Disabled</SelectItem>
                         </SelectContent>
                       </Select>
@@ -1318,42 +1548,60 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Return Tracking</CardTitle>
-                <CardDescription>Monitor your investment returns</CardDescription>
+                <CardDescription>
+                  Monitor your investment returns
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium">Total Returns</CardTitle>
+                        <CardTitle className="text-sm font-medium">
+                          Total Returns
+                        </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="text-2xl font-bold">
-                          ${investorData.portfolioSummary.returnsReceived.toLocaleString()}
+                          $
+                          {investorData.portfolioSummary.returnsReceived.toLocaleString()}
                         </div>
-                        <p className="text-xs text-muted-foreground">Lifetime returns</p>
+                        <p className="text-xs text-muted-foreground">
+                          Lifetime returns
+                        </p>
                       </CardContent>
                     </Card>
 
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium">Pending Returns</CardTitle>
+                        <CardTitle className="text-sm font-medium">
+                          Pending Returns
+                        </CardTitle>
                       </CardHeader>
                       <CardContent>
                         <div className="text-2xl font-bold">
-                          ${investorData.portfolioSummary.pendingReturns.toLocaleString()}
+                          $
+                          {investorData.portfolioSummary.pendingReturns.toLocaleString()}
                         </div>
-                        <p className="text-xs text-muted-foreground">Expected future returns</p>
+                        <p className="text-xs text-muted-foreground">
+                          Expected future returns
+                        </p>
                       </CardContent>
                     </Card>
 
                     <Card>
                       <CardHeader className="pb-2">
-                        <CardTitle className="text-sm font-medium">Average ROI</CardTitle>
+                        <CardTitle className="text-sm font-medium">
+                          Average ROI
+                        </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <div className="text-2xl font-bold">{investorData.portfolioSummary.portfolioROI}%</div>
-                        <p className="text-xs text-muted-foreground">Portfolio average</p>
+                        <div className="text-2xl font-bold">
+                          {investorData.portfolioSummary.portfolioROI}%
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                          Portfolio average
+                        </p>
                       </CardContent>
                     </Card>
                   </div>
@@ -1362,14 +1610,25 @@ export default function InvestorDashboard() {
                     <h3 className="text-lg font-medium mb-4">Return History</h3>
                     <div className="space-y-4">
                       {investorData.completedInvestments.map((investment) => (
-                        <div key={investment.id} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div
+                          key={investment.id}
+                          className="flex items-center justify-between p-4 border rounded-lg"
+                        >
                           <div>
-                            <div className="font-medium">{investment.title}</div>
-                            <div className="text-sm text-muted-foreground">{investment.completionDate}</div>
+                            <div className="font-medium">
+                              {investment.title}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {investment.completionDate}
+                            </div>
                           </div>
                           <div className="text-right">
-                            <div className="font-medium text-green-600">+${investment.profit} RLUSD</div>
-                            <div className="text-sm text-muted-foreground">{investment.actualROI}% ROI</div>
+                            <div className="font-medium text-green-600">
+                              +${investment.profit} RLUSD
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {investment.actualROI}% ROI
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -1383,7 +1642,9 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Reinvestment Options</CardTitle>
-                <CardDescription>Manage your returns and reinvestment strategy</CardDescription>
+                <CardDescription>
+                  Manage your returns and reinvestment strategy
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
@@ -1392,7 +1653,8 @@ export default function InvestorDashboard() {
                       Automatic Reinvestment
                     </Label>
                     <p className="text-sm text-muted-foreground">
-                      Automatically reinvest returns into new projects that match your criteria
+                      Automatically reinvest returns into new projects that
+                      match your criteria
                     </p>
                   </div>
                   <Switch id="auto-reinvest" />
@@ -1401,7 +1663,12 @@ export default function InvestorDashboard() {
                 <div>
                   <Label>Reinvestment Percentage</Label>
                   <div className="mt-4 px-2">
-                    <Slider defaultValue={[75]} max={100} step={5} className="w-full" />
+                    <Slider
+                      defaultValue={[75]}
+                      max={100}
+                      step={5}
+                      className="w-full"
+                    />
                     <div className="flex justify-between text-xs text-muted-foreground mt-2">
                       <span>0%</span>
                       <span>50%</span>
@@ -1421,8 +1688,12 @@ export default function InvestorDashboard() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="similar">Similar Projects</SelectItem>
-                        <SelectItem value="diversify">Diversify Portfolio</SelectItem>
+                        <SelectItem value="similar">
+                          Similar Projects
+                        </SelectItem>
+                        <SelectItem value="diversify">
+                          Diversify Portfolio
+                        </SelectItem>
                         <SelectItem value="high-roi">Highest ROI</SelectItem>
                         <SelectItem value="low-risk">Lowest Risk</SelectItem>
                       </SelectContent>
@@ -1437,7 +1708,9 @@ export default function InvestorDashboard() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="low">Low Risk Only</SelectItem>
-                        <SelectItem value="medium">Up to Medium Risk</SelectItem>
+                        <SelectItem value="medium">
+                          Up to Medium Risk
+                        </SelectItem>
                         <SelectItem value="high">Any Risk Level</SelectItem>
                       </SelectContent>
                     </Select>
@@ -1452,7 +1725,9 @@ export default function InvestorDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Tax Reporting</CardTitle>
-                <CardDescription>Export investment data for tax purposes</CardDescription>
+                <CardDescription>
+                  Export investment data for tax purposes
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1479,7 +1754,9 @@ export default function InvestorDashboard() {
                       <SelectContent>
                         <SelectItem value="all">Complete Tax Report</SelectItem>
                         <SelectItem value="returns">Returns Only</SelectItem>
-                        <SelectItem value="investments">Investments Only</SelectItem>
+                        <SelectItem value="investments">
+                          Investments Only
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -1501,5 +1778,5 @@ export default function InvestorDashboard() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

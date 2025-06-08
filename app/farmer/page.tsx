@@ -1,20 +1,32 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import Header from "@/components/header"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { Switch } from "@/components/ui/switch"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import Header from "@/components/header";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +34,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import {
   Plus,
   TrendingUp,
@@ -43,10 +55,10 @@ import {
   Thermometer,
   Droplets,
   Wind,
-} from "lucide-react"
-import { FarmerRevenueChart } from "@/components/farmer/revenue-chart"
-import { FarmerProjectChart } from "@/components/farmer/project-chart"
-import { FarmerWeatherChart } from "@/components/farmer/weather-chart"
+} from "lucide-react";
+import { FarmerRevenueChart } from "@/components/farmer/revenue-chart";
+import { FarmerProjectChart } from "@/components/farmer/project-chart";
+import { FarmerWeatherChart } from "@/components/farmer/weather-chart";
 
 // Enhanced farmer data with more comprehensive information
 const farmerData = {
@@ -238,11 +250,41 @@ const farmerData = {
       condition: "Partly Cloudy",
     },
     forecast: [
-      { day: "Today", temp: 28, humidity: 75, rainfall: 2.5, condition: "Partly Cloudy" },
-      { day: "Tomorrow", temp: 30, humidity: 70, rainfall: 0, condition: "Sunny" },
-      { day: "Day 3", temp: 26, humidity: 85, rainfall: 15, condition: "Heavy Rain" },
-      { day: "Day 4", temp: 25, humidity: 90, rainfall: 20, condition: "Heavy Rain" },
-      { day: "Day 5", temp: 27, humidity: 80, rainfall: 5, condition: "Light Rain" },
+      {
+        day: "Today",
+        temp: 28,
+        humidity: 75,
+        rainfall: 2.5,
+        condition: "Partly Cloudy",
+      },
+      {
+        day: "Tomorrow",
+        temp: 30,
+        humidity: 70,
+        rainfall: 0,
+        condition: "Sunny",
+      },
+      {
+        day: "Day 3",
+        temp: 26,
+        humidity: 85,
+        rainfall: 15,
+        condition: "Heavy Rain",
+      },
+      {
+        day: "Day 4",
+        temp: 25,
+        humidity: 90,
+        rainfall: 20,
+        condition: "Heavy Rain",
+      },
+      {
+        day: "Day 5",
+        temp: 27,
+        humidity: 80,
+        rainfall: 5,
+        condition: "Light Rain",
+      },
     ],
   },
   marketPrices: {
@@ -254,7 +296,12 @@ const farmerData = {
   },
   farmOperations: {
     equipment: [
-      { name: "Tractor", status: "Operational", lastMaintenance: "2024-02-01", nextMaintenance: "2024-05-01" },
+      {
+        name: "Tractor",
+        status: "Operational",
+        lastMaintenance: "2024-02-01",
+        nextMaintenance: "2024-05-01",
+      },
       {
         name: "Irrigation System",
         status: "Operational",
@@ -270,7 +317,12 @@ const farmerData = {
     ],
     laborSchedule: [
       { task: "Planting", workers: 5, date: "2024-03-15", status: "Scheduled" },
-      { task: "Fertilizing", workers: 3, date: "2024-03-20", status: "Scheduled" },
+      {
+        task: "Fertilizing",
+        workers: 3,
+        date: "2024-03-20",
+        status: "Scheduled",
+      },
       { task: "Harvesting", workers: 8, date: "2024-06-01", status: "Planned" },
     ],
     expenses: {
@@ -339,10 +391,15 @@ const farmerData = {
       },
     ],
   },
-}
+};
 
-function ProjectCard({ project }: { project: (typeof farmerData.activeProjects)[0] }) {
-  const fundingPercentage = (project.currentFunding / project.fundingGoal) * 100
+function ProjectCard({
+  project,
+}: {
+  project: (typeof farmerData.activeProjects)[0];
+}) {
+  const fundingPercentage =
+    (project.currentFunding / project.fundingGoal) * 100;
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-white rounded-2xl border-0 shadow-sm">
@@ -367,8 +424,8 @@ function ProjectCard({ project }: { project: (typeof farmerData.activeProjects)[
               project.status === "funding"
                 ? "bg-blue-100 text-blue-800 border-blue-200"
                 : project.status === "active"
-                  ? "bg-green-100 text-green-800 border-green-200"
-                  : "bg-orange-100 text-orange-800 border-orange-200"
+                ? "bg-green-100 text-green-800 border-green-200"
+                : "bg-orange-100 text-orange-800 border-orange-200"
             } font-medium`}
             variant="outline"
           >
@@ -384,7 +441,9 @@ function ProjectCard({ project }: { project: (typeof farmerData.activeProjects)[
 
       <CardContent className="p-4 space-y-3">
         {/* Project Title */}
-        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">{project.title}</h3>
+        <h3 className="font-semibold text-gray-900 line-clamp-2 leading-tight">
+          {project.title}
+        </h3>
 
         {/* Category */}
         <Badge variant="secondary" className="bg-gray-100 text-gray-700 w-fit">
@@ -400,8 +459,8 @@ function ProjectCard({ project }: { project: (typeof farmerData.activeProjects)[
                 project.cropHealth === "Excellent"
                   ? "text-green-600"
                   : project.cropHealth === "Good"
-                    ? "text-blue-600"
-                    : "text-yellow-600"
+                  ? "text-blue-600"
+                  : "text-yellow-600"
               }`}
             >
               {project.cropHealth}
@@ -414,8 +473,8 @@ function ProjectCard({ project }: { project: (typeof farmerData.activeProjects)[
                 project.weatherRisk === "Low"
                   ? "text-green-600"
                   : project.weatherRisk === "Medium"
-                    ? "text-yellow-600"
-                    : "text-red-600"
+                  ? "text-yellow-600"
+                  : "text-red-600"
               }`}
             >
               {project.weatherRisk}
@@ -427,12 +486,15 @@ function ProjectCard({ project }: { project: (typeof farmerData.activeProjects)[
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600">Funding Progress</span>
-            <span className="font-medium text-gray-900">{Math.round(fundingPercentage)}%</span>
+            <span className="font-medium text-gray-900">
+              {Math.round(fundingPercentage)}%
+            </span>
           </div>
           <Progress value={fundingPercentage} className="h-2 bg-gray-100" />
           <div className="flex justify-between text-xs text-gray-500">
             <span>
-              ${project.currentFunding.toLocaleString()} / ${project.fundingGoal.toLocaleString()}
+              ${project.currentFunding.toLocaleString()} / $
+              {project.fundingGoal.toLocaleString()}
             </span>
             <span>{project.investorCount} investors</span>
           </div>
@@ -445,33 +507,40 @@ function ProjectCard({ project }: { project: (typeof farmerData.activeProjects)[
             <span className="font-medium text-gray-900">{project.stage}</span>
           </div>
           <Progress value={project.progress} className="h-2 bg-gray-100" />
-          <div className="text-xs text-gray-500 text-center">{project.progress}% complete</div>
+          <div className="text-xs text-gray-500 text-center">
+            {project.progress}% complete
+          </div>
         </div>
 
         {/* Action Buttons */}
         <div className="flex justify-between items-center pt-2">
-          <div className="text-sm text-gray-600">{project.daysRemaining} days remaining</div>
+          <div className="text-sm text-gray-600">
+            {project.daysRemaining} days remaining
+          </div>
           <div className="flex gap-2">
             <Button size="sm" variant="outline" className="rounded-xl" asChild>
               <Link href={`/projects/${project.id}`}>View</Link>
             </Button>
-            <Button size="sm" className="bg-green-600 hover:bg-green-700 text-white rounded-xl">
+            <Button
+              size="sm"
+              className="bg-green-600 hover:bg-green-700 text-white rounded-xl"
+            >
               Update
             </Button>
           </div>
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default function FarmerDashboard() {
-  const [activeTab, setActiveTab] = useState("overview")
+  const [activeTab, setActiveTab] = useState("overview");
 
   return (
     <div className="min-h-screen bg-background">
       <Header
-        title="Agri-Trust"
+        title="AgriVest"
         navLinks={[
           { href: "/projects", label: "Browse Projects" },
           { href: "/farmer", label: "Farmer Dashboard", isPrimary: true },
@@ -485,7 +554,9 @@ export default function FarmerDashboard() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar className="cursor-pointer">
-              <AvatarImage src={farmerData.profile.avatar || "/placeholder.svg"} />
+              <AvatarImage
+                src={farmerData.profile.avatar || "/placeholder.svg"}
+              />
               <AvatarFallback>
                 {farmerData.profile.name
                   .split(" ")
@@ -511,7 +582,9 @@ export default function FarmerDashboard() {
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-3xl font-bold mb-2">Farmer Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back, {farmerData.profile.name}</p>
+            <p className="text-muted-foreground">
+              Welcome back, {farmerData.profile.name}
+            </p>
           </div>
           <Button asChild>
             <Link href="/create-project">
@@ -521,7 +594,11 @@ export default function FarmerDashboard() {
           </Button>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="space-y-8"
+        >
           <TabsList className="grid w-full grid-cols-6 max-w-3xl">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="projects">Projects</TabsTrigger>
@@ -536,45 +613,69 @@ export default function FarmerDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Active Projects
+                  </CardTitle>
                   <Target className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{farmerData.stats.activeProjects}</div>
-                  <p className="text-xs text-muted-foreground">Currently running</p>
+                  <div className="text-2xl font-bold">
+                    {farmerData.stats.activeProjects}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Currently running
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Raised</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Raised
+                  </CardTitle>
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">${farmerData.stats.totalRaised.toLocaleString()}</div>
-                  <p className="text-xs text-muted-foreground">Lifetime funding</p>
+                  <div className="text-2xl font-bold">
+                    ${farmerData.stats.totalRaised.toLocaleString()}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Lifetime funding
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Success Rate
+                  </CardTitle>
                   <TrendingUp className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{farmerData.stats.successRate}%</div>
-                  <p className="text-xs text-muted-foreground">Project success rate</p>
+                  <div className="text-2xl font-bold">
+                    {farmerData.stats.successRate}%
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Project success rate
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Farmer Rating</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Farmer Rating
+                  </CardTitle>
                   <Star className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{farmerData.profile.rating}</div>
-                  <p className="text-xs text-muted-foreground">Average rating</p>
+                  <div className="text-2xl font-bold">
+                    {farmerData.profile.rating}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Average rating
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -587,42 +688,64 @@ export default function FarmerDashboard() {
                     <CloudRain className="w-5 h-5" />
                     Weather Conditions
                   </CardTitle>
-                  <CardDescription>Current weather in {farmerData.profile.location}</CardDescription>
+                  <CardDescription>
+                    Current weather in {farmerData.profile.location}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="flex items-center gap-2">
                       <Thermometer className="w-4 h-4 text-orange-500" />
                       <div>
-                        <div className="font-medium">{farmerData.weatherData.current.temperature}°C</div>
-                        <div className="text-xs text-muted-foreground">Temperature</div>
+                        <div className="font-medium">
+                          {farmerData.weatherData.current.temperature}°C
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Temperature
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Droplets className="w-4 h-4 text-blue-500" />
                       <div>
-                        <div className="font-medium">{farmerData.weatherData.current.humidity}%</div>
-                        <div className="text-xs text-muted-foreground">Humidity</div>
+                        <div className="font-medium">
+                          {farmerData.weatherData.current.humidity}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Humidity
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <CloudRain className="w-4 h-4 text-blue-600" />
                       <div>
-                        <div className="font-medium">{farmerData.weatherData.current.rainfall}mm</div>
-                        <div className="text-xs text-muted-foreground">Rainfall</div>
+                        <div className="font-medium">
+                          {farmerData.weatherData.current.rainfall}mm
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Rainfall
+                        </div>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
                       <Wind className="w-4 h-4 text-gray-500" />
                       <div>
-                        <div className="font-medium">{farmerData.weatherData.current.windSpeed} km/h</div>
-                        <div className="text-xs text-muted-foreground">Wind Speed</div>
+                        <div className="font-medium">
+                          {farmerData.weatherData.current.windSpeed} km/h
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          Wind Speed
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div className="mt-4 p-3 bg-muted rounded-lg">
-                    <div className="font-medium">{farmerData.weatherData.current.condition}</div>
-                    <div className="text-sm text-muted-foreground">Current conditions</div>
+                    <div className="font-medium">
+                      {farmerData.weatherData.current.condition}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Current conditions
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -633,30 +756,41 @@ export default function FarmerDashboard() {
                     <BarChart className="w-5 h-5" />
                     Market Prices
                   </CardTitle>
-                  <CardDescription>Current market prices (THB per ton)</CardDescription>
+                  <CardDescription>
+                    Current market prices (THB per ton)
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
-                    {Object.entries(farmerData.marketPrices).map(([crop, data]) => (
-                      <div key={crop} className="flex items-center justify-between">
-                        <div className="capitalize font-medium">{crop}</div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-medium">₿{data.current}</span>
-                          <div
-                            className={`flex items-center gap-1 text-sm ${
-                              data.trend === "up"
-                                ? "text-green-600"
-                                : data.trend === "down"
+                    {Object.entries(farmerData.marketPrices).map(
+                      ([crop, data]) => (
+                        <div
+                          key={crop}
+                          className="flex items-center justify-between"
+                        >
+                          <div className="capitalize font-medium">{crop}</div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium">₿{data.current}</span>
+                            <div
+                              className={`flex items-center gap-1 text-sm ${
+                                data.trend === "up"
+                                  ? "text-green-600"
+                                  : data.trend === "down"
                                   ? "text-red-600"
                                   : "text-gray-600"
-                            }`}
-                          >
-                            {data.trend === "up" ? "↗" : data.trend === "down" ? "↘" : "→"}
-                            {data.change}%
+                              }`}
+                            >
+                              {data.trend === "up"
+                                ? "↗"
+                                : data.trend === "down"
+                                ? "↘"
+                                : "→"}
+                              {data.change}%
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ))}
+                      )
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -716,13 +850,20 @@ export default function FarmerDashboard() {
               <CardContent>
                 <div className="space-y-4">
                   {farmerData.notifications.slice(0, 5).map((notification) => (
-                    <div key={notification.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50">
+                    <div
+                      key={notification.id}
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50"
+                    >
                       <div
-                        className={`w-2 h-2 rounded-full mt-2 ${notification.unread ? "bg-blue-600" : "bg-gray-300"}`}
+                        className={`w-2 h-2 rounded-full mt-2 ${
+                          notification.unread ? "bg-blue-600" : "bg-gray-300"
+                        }`}
                       />
                       <div className="flex-1">
                         <p className="text-sm">{notification.message}</p>
-                        <p className="text-xs text-muted-foreground">{notification.timestamp}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {notification.timestamp}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -747,7 +888,9 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Ongoing Projects</CardTitle>
-                <CardDescription>Projects currently in progress or seeking funding</CardDescription>
+                <CardDescription>
+                  Projects currently in progress or seeking funding
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
@@ -755,10 +898,18 @@ export default function FarmerDashboard() {
                     <div key={project.id} className="border rounded-lg p-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="text-lg font-semibold">{project.title}</h3>
+                          <h3 className="text-lg font-semibold">
+                            {project.title}
+                          </h3>
                           <div className="flex items-center gap-2 mt-1">
                             <Badge variant="outline">{project.category}</Badge>
-                            <Badge variant={project.status === "funding" ? "secondary" : "default"}>
+                            <Badge
+                              variant={
+                                project.status === "funding"
+                                  ? "secondary"
+                                  : "default"
+                              }
+                            >
                               {project.status}
                             </Badge>
                           </div>
@@ -777,20 +928,37 @@ export default function FarmerDashboard() {
 
                       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                         <div>
-                          <Label className="text-sm font-medium">Funding Progress</Label>
+                          <Label className="text-sm font-medium">
+                            Funding Progress
+                          </Label>
                           <div className="mt-2">
-                            <Progress value={(project.currentFunding / project.fundingGoal) * 100} className="h-2" />
+                            <Progress
+                              value={
+                                (project.currentFunding / project.fundingGoal) *
+                                100
+                              }
+                              className="h-2"
+                            />
                             <div className="flex justify-between text-xs text-muted-foreground mt-1">
-                              <span>${project.currentFunding.toLocaleString()}</span>
-                              <span>${project.fundingGoal.toLocaleString()}</span>
+                              <span>
+                                ${project.currentFunding.toLocaleString()}
+                              </span>
+                              <span>
+                                ${project.fundingGoal.toLocaleString()}
+                              </span>
                             </div>
                           </div>
                         </div>
 
                         <div>
-                          <Label className="text-sm font-medium">Project Progress</Label>
+                          <Label className="text-sm font-medium">
+                            Project Progress
+                          </Label>
                           <div className="mt-2">
-                            <Progress value={project.progress} className="h-2" />
+                            <Progress
+                              value={project.progress}
+                              className="h-2"
+                            />
                             <div className="flex justify-between text-xs text-muted-foreground mt-1">
                               <span>{project.stage}</span>
                               <span>{project.progress}%</span>
@@ -799,41 +967,60 @@ export default function FarmerDashboard() {
                         </div>
 
                         <div>
-                          <Label className="text-sm font-medium">Crop Health</Label>
+                          <Label className="text-sm font-medium">
+                            Crop Health
+                          </Label>
                           <div className="mt-2">
                             <div
                               className={`text-lg font-bold ${
                                 project.cropHealth === "Excellent"
                                   ? "text-green-600"
                                   : project.cropHealth === "Good"
-                                    ? "text-blue-600"
-                                    : "text-yellow-600"
+                                  ? "text-blue-600"
+                                  : "text-yellow-600"
                               }`}
                             >
                               {project.cropHealth}
                             </div>
-                            <div className="text-xs text-muted-foreground">Current status</div>
+                            <div className="text-xs text-muted-foreground">
+                              Current status
+                            </div>
                           </div>
                         </div>
 
                         <div>
-                          <Label className="text-sm font-medium">Expected Yield</Label>
+                          <Label className="text-sm font-medium">
+                            Expected Yield
+                          </Label>
                           <div className="mt-2">
-                            <div className="text-lg font-bold">{project.expectedYield} tons</div>
-                            <div className="text-xs text-muted-foreground">Projected harvest</div>
+                            <div className="text-lg font-bold">
+                              {project.expectedYield} tons
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              Projected harvest
+                            </div>
                           </div>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 text-sm">
                         <div>
-                          <span className="text-muted-foreground">Planting Date:</span> {project.plantingDate}
+                          <span className="text-muted-foreground">
+                            Planting Date:
+                          </span>{" "}
+                          {project.plantingDate}
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Expected Harvest:</span> {project.expectedHarvest}
+                          <span className="text-muted-foreground">
+                            Expected Harvest:
+                          </span>{" "}
+                          {project.expectedHarvest}
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Market Price:</span> ₿{project.marketPrice}/ton
+                          <span className="text-muted-foreground">
+                            Market Price:
+                          </span>{" "}
+                          ₿{project.marketPrice}/ton
                         </div>
                       </div>
                     </div>
@@ -846,7 +1033,9 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Completed Projects</CardTitle>
-                <CardDescription>Projects requiring settlement or already completed</CardDescription>
+                <CardDescription>
+                  Projects requiring settlement or already completed
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -854,8 +1043,12 @@ export default function FarmerDashboard() {
                   <div className="p-4 border rounded-lg bg-orange-50 border-orange-ge-200">
                     <div className="flex justify-between items-start mb-3">
                       <div>
-                        <h4 className="font-medium text-orange-900">Organic Tomato Greenhouse 2024</h4>
-                        <p className="text-sm text-orange-700">Completed • Harvest finished on March 15, 2024</p>
+                        <h4 className="font-medium text-orange-900">
+                          Organic Tomato Greenhouse 2024
+                        </h4>
+                        <p className="text-sm text-orange-700">
+                          Completed • Harvest finished on March 15, 2024
+                        </p>
                       </div>
                       <Badge variant="destructive" className="bg-orange-600">
                         🔴 Settlement Required
@@ -865,31 +1058,43 @@ export default function FarmerDashboard() {
                     <div className="bg-orange-100 p-3 rounded-lg mb-3">
                       <div className="flex items-center gap-2 mb-2">
                         <Clock className="w-4 h-4 text-orange-600" />
-                        <span className="font-medium text-orange-900">Action Required</span>
+                        <span className="font-medium text-orange-900">
+                          Action Required
+                        </span>
                       </div>
                       <p className="text-sm text-orange-800">
-                        Upload sales invoice to complete settlement and distribute returns to investors.
+                        Upload sales invoice to complete settlement and
+                        distribute returns to investors.
                       </p>
                       <p className="text-xs text-orange-700 mt-1">
-                        Deadline: Submit within 30 days of harvest completion (15 days remaining)
+                        Deadline: Submit within 30 days of harvest completion
+                        (15 days remaining)
                       </p>
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">Total Invested:</span>
+                        <span className="text-muted-foreground">
+                          Total Invested:
+                        </span>
                         <div className="font-medium">$45,000 RLUSD</div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Investors:</span>
+                        <span className="text-muted-foreground">
+                          Investors:
+                        </span>
                         <div className="font-medium">127 investors</div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Expected Revenue:</span>
+                        <span className="text-muted-foreground">
+                          Expected Revenue:
+                        </span>
                         <div className="font-medium">$58,500 RLUSD</div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Projected ROI:</span>
+                        <span className="text-muted-foreground">
+                          Projected ROI:
+                        </span>
                         <div className="font-medium text-green-600">30%</div>
                       </div>
                     </div>
@@ -910,10 +1115,17 @@ export default function FarmerDashboard() {
                   <div className="p-4 border rounded-lg bg-blue-50 border-blue-200">
                     <div className="flex justify-between items-start mb-3">
                       <div>
-                        <h4 className="font-medium text-blue-900">Sweet Corn Farm 2024</h4>
-                        <p className="text-sm text-blue-700">Settlement submitted • Under admin verification</p>
+                        <h4 className="font-medium text-blue-900">
+                          Sweet Corn Farm 2024
+                        </h4>
+                        <p className="text-sm text-blue-700">
+                          Settlement submitted • Under admin verification
+                        </p>
                       </div>
-                      <Badge variant="secondary" className="bg-blue-600 text-white">
+                      <Badge
+                        variant="secondary"
+                        className="bg-blue-600 text-white"
+                      >
                         🔍 Verification Pending
                       </Badge>
                     </div>
@@ -921,32 +1133,45 @@ export default function FarmerDashboard() {
                     <div className="bg-blue-100 p-3 rounded-lg mb-3">
                       <div className="flex items-center gap-2 mb-2">
                         <CheckCircle className="w-4 h-4 text-blue-600" />
-                        <span className="font-medium text-blue-900">Revenue Proof Submitted</span>
+                        <span className="font-medium text-blue-900">
+                          Revenue Proof Submitted
+                        </span>
                       </div>
                       <p className="text-sm text-blue-800">
-                        Sales invoice uploaded and under admin verification. You'll be notified when verification is
-                        complete.
+                        Sales invoice uploaded and under admin verification.
+                        You'll be notified when verification is complete.
                       </p>
                       <p className="text-xs text-blue-700 mt-1">
-                        Submitted: March 20, 2024 • Estimated verification: 24-48 hours
+                        Submitted: March 20, 2024 • Estimated verification:
+                        24-48 hours
                       </p>
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 text-sm">
                       <div>
-                        <span className="text-muted-foreground">Reported Revenue:</span>
+                        <span className="text-muted-foreground">
+                          Reported Revenue:
+                        </span>
                         <div className="font-medium">$32,400 RLUSD</div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Total Invested:</span>
+                        <span className="text-muted-foreground">
+                          Total Invested:
+                        </span>
                         <div className="font-medium">$25,000 RLUSD</div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Net Profit:</span>
-                        <div className="font-medium text-green-600">$7,400 RLUSD</div>
+                        <span className="text-muted-foreground">
+                          Net Profit:
+                        </span>
+                        <div className="font-medium text-green-600">
+                          $7,400 RLUSD
+                        </div>
                       </div>
                       <div>
-                        <span className="text-muted-foreground">Actual ROI:</span>
+                        <span className="text-muted-foreground">
+                          Actual ROI:
+                        </span>
                         <div className="font-medium text-green-600">29.6%</div>
                       </div>
                     </div>
@@ -962,11 +1187,18 @@ export default function FarmerDashboard() {
 
                   {/* Successfully Completed Projects */}
                   {farmerData.completedProjects.map((project) => (
-                    <div key={project.id} className="p-4 border rounded-lg bg-green-50 border-green-200">
+                    <div
+                      key={project.id}
+                      className="p-4 border rounded-lg bg-green-50 border-green-200"
+                    >
                       <div className="flex justify-between items-start mb-3">
                         <div>
-                          <h4 className="font-medium text-green-900">{project.title}</h4>
-                          <p className="text-sm text-green-700">Completed {project.completionDate}</p>
+                          <h4 className="font-medium text-green-900">
+                            {project.title}
+                          </h4>
+                          <p className="text-sm text-green-700">
+                            Completed {project.completionDate}
+                          </p>
                         </div>
                         <Badge variant="default" className="bg-green-600">
                           ✅ Settlement Completed
@@ -976,15 +1208,25 @@ export default function FarmerDashboard() {
                       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4 text-sm">
                         <div>
                           <span className="text-muted-foreground">Raised:</span>
-                          <div className="font-medium">${project.investmentAmount.toLocaleString()}</div>
+                          <div className="font-medium">
+                            ${project.investmentAmount.toLocaleString()}
+                          </div>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Returned:</span>
-                          <div className="font-medium">${project.returnAmount.toLocaleString()}</div>
+                          <span className="text-muted-foreground">
+                            Returned:
+                          </span>
+                          <div className="font-medium">
+                            ${project.returnAmount.toLocaleString()}
+                          </div>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">Investors:</span>
-                          <div className="font-medium">{project.investorCount}</div>
+                          <span className="text-muted-foreground">
+                            Investors:
+                          </span>
+                          <div className="font-medium">
+                            {project.investorCount}
+                          </div>
                         </div>
                         <div>
                           <span className="text-muted-foreground">Yield:</span>
@@ -993,8 +1235,12 @@ export default function FarmerDashboard() {
                           </div>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">ROI Delivered:</span>
-                          <div className="font-medium text-green-600">+{project.roi}%</div>
+                          <span className="text-muted-foreground">
+                            ROI Delivered:
+                          </span>
+                          <div className="font-medium text-green-600">
+                            +{project.roi}%
+                          </div>
                         </div>
                       </div>
 
@@ -1024,7 +1270,9 @@ export default function FarmerDashboard() {
                   <CloudRain className="w-5 h-5" />
                   Weather Monitoring
                 </CardTitle>
-                <CardDescription>5-day weather forecast for your farm</CardDescription>
+                <CardDescription>
+                  5-day weather forecast for your farm
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="h-64 mb-4">
@@ -1036,8 +1284,12 @@ export default function FarmerDashboard() {
                       <CardContent className="p-4 text-center">
                         <div className="font-medium">{day.day}</div>
                         <div className="text-2xl font-bold">{day.temp}°C</div>
-                        <div className="text-sm text-muted-foreground">{day.condition}</div>
-                        <div className="text-xs text-blue-600">{day.rainfall}mm rain</div>
+                        <div className="text-sm text-muted-foreground">
+                          {day.condition}
+                        </div>
+                        <div className="text-xs text-blue-600">
+                          {day.rainfall}mm rain
+                        </div>
                       </CardContent>
                     </Card>
                   ))}
@@ -1049,26 +1301,41 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Equipment Management</CardTitle>
-                <CardDescription>Monitor and maintain your farm equipment</CardDescription>
+                <CardDescription>
+                  Monitor and maintain your farm equipment
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {farmerData.farmOperations.equipment.map((equipment, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div>
-                        <div className="font-medium">{equipment.name}</div>
-                        <div className="text-sm text-muted-foreground">
-                          Last maintenance: {equipment.lastMaintenance}
+                  {farmerData.farmOperations.equipment.map(
+                    (equipment, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-4 border rounded-lg"
+                      >
+                        <div>
+                          <div className="font-medium">{equipment.name}</div>
+                          <div className="text-sm text-muted-foreground">
+                            Last maintenance: {equipment.lastMaintenance}
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <Badge
+                            variant={
+                              equipment.status === "Operational"
+                                ? "default"
+                                : "destructive"
+                            }
+                          >
+                            {equipment.status}
+                          </Badge>
+                          <div className="text-sm text-muted-foreground mt-1">
+                            Next: {equipment.nextMaintenance}
+                          </div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <Badge variant={equipment.status === "Operational" ? "default" : "destructive"}>
-                          {equipment.status}
-                        </Badge>
-                        <div className="text-sm text-muted-foreground mt-1">Next: {equipment.nextMaintenance}</div>
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -1077,22 +1344,39 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Labor Schedule</CardTitle>
-                <CardDescription>Upcoming farm activities and labor requirements</CardDescription>
+                <CardDescription>
+                  Upcoming farm activities and labor requirements
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {farmerData.farmOperations.laborSchedule.map((task, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div>
-                        <div className="font-medium">{task.task}</div>
-                        <div className="text-sm text-muted-foreground">{task.workers} workers required</div>
+                  {farmerData.farmOperations.laborSchedule.map(
+                    (task, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between p-4 border rounded-lg"
+                      >
+                        <div>
+                          <div className="font-medium">{task.task}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {task.workers} workers required
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium">{task.date}</div>
+                          <Badge
+                            variant={
+                              task.status === "Scheduled"
+                                ? "default"
+                                : "secondary"
+                            }
+                          >
+                            {task.status}
+                          </Badge>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-medium">{task.date}</div>
-                        <Badge variant={task.status === "Scheduled" ? "default" : "secondary"}>{task.status}</Badge>
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -1101,21 +1385,32 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Expense Tracking</CardTitle>
-                <CardDescription>Monitor your farm operational costs</CardDescription>
+                <CardDescription>
+                  Monitor your farm operational costs
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {Object.entries(farmerData.farmOperations.expenses).map(([category, amount]) => (
-                    <div key={category} className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-4 h-4 bg-primary rounded-sm"></div>
-                        <span className="capitalize">{category.replace("_", " ")}</span>
+                  {Object.entries(farmerData.farmOperations.expenses).map(
+                    ([category, amount]) => (
+                      <div
+                        key={category}
+                        className="flex items-center justify-between"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-4 h-4 bg-primary rounded-sm"></div>
+                          <span className="capitalize">
+                            {category.replace("_", " ")}
+                          </span>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium">
+                            ${amount.toLocaleString()}
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-medium">${amount.toLocaleString()}</div>
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  )}
                 </div>
                 <div className="border-t pt-4 mt-4">
                   <div className="flex justify-between items-center">
@@ -1149,9 +1444,15 @@ export default function FarmerDashboard() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="1">Organic Jasmine Rice Farm</SelectItem>
-                        <SelectItem value="2">Sustainable Vegetable Garden</SelectItem>
-                        <SelectItem value="3">Herb Cultivation Project</SelectItem>
+                        <SelectItem value="1">
+                          Organic Jasmine Rice Farm
+                        </SelectItem>
+                        <SelectItem value="2">
+                          Sustainable Vegetable Garden
+                        </SelectItem>
+                        <SelectItem value="3">
+                          Herb Cultivation Project
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -1162,8 +1463,12 @@ export default function FarmerDashboard() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="progress">Progress Update</SelectItem>
-                        <SelectItem value="milestone">Milestone Achievement</SelectItem>
+                        <SelectItem value="progress">
+                          Progress Update
+                        </SelectItem>
+                        <SelectItem value="milestone">
+                          Milestone Achievement
+                        </SelectItem>
                         <SelectItem value="issue">Issue Report</SelectItem>
                         <SelectItem value="harvest">Harvest Update</SelectItem>
                         <SelectItem value="weather">Weather Impact</SelectItem>
@@ -1202,14 +1507,23 @@ export default function FarmerDashboard() {
                       <div className="flex justify-between items-start mb-2">
                         <div className="font-medium">{message.subject}</div>
                         <div className="flex items-center gap-2">
-                          <Badge variant={message.status === "unread" ? "default" : "secondary"}>
+                          <Badge
+                            variant={
+                              message.status === "unread"
+                                ? "default"
+                                : "secondary"
+                            }
+                          >
                             {message.status}
                           </Badge>
-                          <div className="text-sm text-muted-foreground">{message.timestamp}</div>
+                          <div className="text-sm text-muted-foreground">
+                            {message.timestamp}
+                          </div>
                         </div>
                       </div>
                       <p className="text-sm text-muted-foreground mb-2">
-                        From: {message.from.slice(0, 8)}...{message.from.slice(-8)}
+                        From: {message.from.slice(0, 8)}...
+                        {message.from.slice(-8)}
                       </p>
                       <p className="text-sm mb-3">{message.message}</p>
                       <div className="flex gap-2">
@@ -1237,7 +1551,9 @@ export default function FarmerDashboard() {
                         <div className="font-medium">{update.title}</div>
                         <Badge variant="outline">{update.milestone}</Badge>
                       </div>
-                      <p className="text-sm text-muted-foreground mb-2">{update.timestamp}</p>
+                      <p className="text-sm text-muted-foreground mb-2">
+                        {update.timestamp}
+                      </p>
                       <p className="text-sm">{update.message}</p>
                     </div>
                   ))}
@@ -1253,7 +1569,9 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Revenue Analytics</CardTitle>
-                <CardDescription>Track your farming revenue over time</CardDescription>
+                <CardDescription>
+                  Track your farming revenue over time
+                </CardDescription>
               </CardHeader>
               <CardContent className="h-80">
                 <FarmerRevenueChart />
@@ -1264,7 +1582,9 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Project Performance</CardTitle>
-                <CardDescription>Compare actual vs projected yields</CardDescription>
+                <CardDescription>
+                  Compare actual vs projected yields
+                </CardDescription>
               </CardHeader>
               <CardContent className="h-80">
                 <FarmerProjectChart />
@@ -1275,31 +1595,47 @@ export default function FarmerDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-sm font-medium">Average ROI Delivered</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Average ROI Delivered
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{farmerData.stats.averageROI}%</div>
-                  <p className="text-xs text-muted-foreground">Across all completed projects</p>
+                  <div className="text-2xl font-bold">
+                    {farmerData.stats.averageROI}%
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Across all completed projects
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-sm font-medium">Yield Accuracy</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Yield Accuracy
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">96%</div>
-                  <p className="text-xs text-muted-foreground">Actual vs projected yield</p>
+                  <p className="text-xs text-muted-foreground">
+                    Actual vs projected yield
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-sm font-medium">Investor Satisfaction</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Investor Satisfaction
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{farmerData.profile.rating}/5</div>
-                  <p className="text-xs text-muted-foreground">Average investor rating</p>
+                  <div className="text-2xl font-bold">
+                    {farmerData.profile.rating}/5
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Average investor rating
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -1308,7 +1644,9 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Export Reports</CardTitle>
-                <CardDescription>Download detailed reports for analysis</CardDescription>
+                <CardDescription>
+                  Download detailed reports for analysis
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1319,10 +1657,18 @@ export default function FarmerDashboard() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="financial">Financial Report</SelectItem>
-                        <SelectItem value="project">Project Performance</SelectItem>
-                        <SelectItem value="investor">Investor Communication</SelectItem>
-                        <SelectItem value="operations">Farm Operations</SelectItem>
+                        <SelectItem value="financial">
+                          Financial Report
+                        </SelectItem>
+                        <SelectItem value="project">
+                          Project Performance
+                        </SelectItem>
+                        <SelectItem value="investor">
+                          Investor Communication
+                        </SelectItem>
+                        <SelectItem value="operations">
+                          Farm Operations
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -1362,12 +1708,16 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Farmer Profile</CardTitle>
-                <CardDescription>Manage your public farmer profile</CardDescription>
+                <CardDescription>
+                  Manage your public farmer profile
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center gap-6">
                   <Avatar className="w-20 h-20">
-                    <AvatarImage src={farmerData.profile.avatar || "/placeholder.svg"} />
+                    <AvatarImage
+                      src={farmerData.profile.avatar || "/placeholder.svg"}
+                    />
                     <AvatarFallback>
                       {farmerData.profile.name
                         .split(" ")
@@ -1386,19 +1736,36 @@ export default function FarmerDashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <Label htmlFor="farmer-name">Full Name</Label>
-                    <Input id="farmer-name" defaultValue={farmerData.profile.name} className="mt-2" />
+                    <Input
+                      id="farmer-name"
+                      defaultValue={farmerData.profile.name}
+                      className="mt-2"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="specialization">Specialization</Label>
-                    <Input id="specialization" defaultValue={farmerData.profile.specialization} className="mt-2" />
+                    <Input
+                      id="specialization"
+                      defaultValue={farmerData.profile.specialization}
+                      className="mt-2"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="location">Location</Label>
-                    <Input id="location" defaultValue={farmerData.profile.location} className="mt-2" />
+                    <Input
+                      id="location"
+                      defaultValue={farmerData.profile.location}
+                      className="mt-2"
+                    />
                   </div>
                   <div>
                     <Label htmlFor="farm-size">Farm Size (hectares)</Label>
-                    <Input id="farm-size" type="number" defaultValue={farmerData.profile.farmSize} className="mt-2" />
+                    <Input
+                      id="farm-size"
+                      type="number"
+                      defaultValue={farmerData.profile.farmSize}
+                      className="mt-2"
+                    />
                   </div>
                 </div>
 
@@ -1435,7 +1802,9 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Verification Status</CardTitle>
-                <CardDescription>Manage your farmer verification and credentials</CardDescription>
+                <CardDescription>
+                  Manage your farmer verification and credentials
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between p-4 border rounded-lg">
@@ -1443,7 +1812,9 @@ export default function FarmerDashboard() {
                     <CheckCircle className="w-5 h-5 text-green-600" />
                     <div>
                       <div className="font-medium">Identity Verification</div>
-                      <div className="text-sm text-muted-foreground">Government ID verified</div>
+                      <div className="text-sm text-muted-foreground">
+                        Government ID verified
+                      </div>
                     </div>
                   </div>
                   <Badge variant="default">Verified</Badge>
@@ -1454,7 +1825,9 @@ export default function FarmerDashboard() {
                     <CheckCircle className="w-5 h-5 text-green-600" />
                     <div>
                       <div className="font-medium">Land Ownership</div>
-                      <div className="text-sm text-muted-foreground">Property documents verified</div>
+                      <div className="text-sm text-muted-foreground">
+                        Property documents verified
+                      </div>
                     </div>
                   </div>
                   <Badge variant="default">Verified</Badge>
@@ -1465,7 +1838,9 @@ export default function FarmerDashboard() {
                     <CheckCircle className="w-5 h-5 text-green-600" />
                     <div>
                       <div className="font-medium">Farming Experience</div>
-                      <div className="text-sm text-muted-foreground">12 years experience verified</div>
+                      <div className="text-sm text-muted-foreground">
+                        12 years experience verified
+                      </div>
                     </div>
                   </div>
                   <Badge variant="default">Verified</Badge>
@@ -1476,7 +1851,9 @@ export default function FarmerDashboard() {
                     <Clock className="w-5 h-5 text-yellow-600" />
                     <div>
                       <div className="font-medium">Organic Certification</div>
-                      <div className="text-sm text-muted-foreground">Pending renewal</div>
+                      <div className="text-sm text-muted-foreground">
+                        Pending renewal
+                      </div>
                     </div>
                   </div>
                   <Badge variant="secondary">Pending</Badge>
@@ -1488,15 +1865,22 @@ export default function FarmerDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Account Settings</CardTitle>
-                <CardDescription>Manage your account preferences</CardDescription>
+                <CardDescription>
+                  Manage your account preferences
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <Label htmlFor="email-notifications" className="font-medium">
+                    <Label
+                      htmlFor="email-notifications"
+                      className="font-medium"
+                    >
                       Email Notifications
                     </Label>
-                    <p className="text-sm text-muted-foreground">Receive email notifications for important updates</p>
+                    <p className="text-sm text-muted-foreground">
+                      Receive email notifications for important updates
+                    </p>
                   </div>
                   <Switch id="email-notifications" defaultChecked />
                 </div>
@@ -1506,7 +1890,9 @@ export default function FarmerDashboard() {
                     <Label htmlFor="auto-updates" className="font-medium">
                       Automatic Updates
                     </Label>
-                    <p className="text-sm text-muted-foreground">Automatically post weekly progress updates</p>
+                    <p className="text-sm text-muted-foreground">
+                      Automatically post weekly progress updates
+                    </p>
                   </div>
                   <Switch id="auto-updates" />
                 </div>
@@ -1516,7 +1902,9 @@ export default function FarmerDashboard() {
                     <Label htmlFor="public-profile" className="font-medium">
                       Public Profile
                     </Label>
-                    <p className="text-sm text-muted-foreground">Make your profile visible to potential investors</p>
+                    <p className="text-sm text-muted-foreground">
+                      Make your profile visible to potential investors
+                    </p>
                   </div>
                   <Switch id="public-profile" defaultChecked />
                 </div>
@@ -1541,5 +1929,5 @@ export default function FarmerDashboard() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

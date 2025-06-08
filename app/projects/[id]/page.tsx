@@ -1,15 +1,15 @@
-import Link from "next/link"
-import Image from "next/image"
-import Header from "@/components/header"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import Link from "next/link";
+import Image from "next/image";
+import Header from "@/components/header";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import {
   MapPin,
   Calendar,
@@ -25,7 +25,7 @@ import {
   AlertTriangle,
   CheckCircle,
   Leaf,
-} from "lucide-react"
+} from "lucide-react";
 
 // Mock project data
 const projectData = {
@@ -44,7 +44,8 @@ const projectData = {
     avatar: "/placeholder.svg?height=100&width=100",
     verified: true,
     joinedDate: "2022-03-15",
-    description: "Somchai has been growing organic rice for over 12 years and is a certified organic farmer. He leads a small cooperative and is dedicated to sustainable farming practices.",
+    description:
+      "Somchai has been growing organic rice for over 12 years and is a certified organic farmer. He leads a small cooperative and is dedicated to sustainable farming practices.",
   },
   financial: {
     investmentGoal: 25000,
@@ -57,7 +58,11 @@ const projectData = {
   },
   riskAssessment: {
     level: "Medium",
-    factors: ["Weather conditions", "Market price fluctuation", "Pest and disease"],
+    factors: [
+      "Weather conditions",
+      "Market price fluctuation",
+      "Pest and disease",
+    ],
     mitigationStrategies: [
       "Crop insurance coverage",
       "Diversified planting schedule",
@@ -80,7 +85,8 @@ const projectData = {
       duration: 14,
       startDate: "2024-01-01",
       endDate: "2024-01-14",
-      description: "Soil testing, plowing, leveling, and organic fertilizer application",
+      description:
+        "Soil testing, plowing, leveling, and organic fertilizer application",
       status: "completed",
     },
     {
@@ -88,7 +94,8 @@ const projectData = {
       duration: 7,
       startDate: "2024-01-15",
       endDate: "2024-01-21",
-      description: "Seed preparation and planting using organic jasmine rice varieties",
+      description:
+        "Seed preparation and planting using organic jasmine rice varieties",
       status: "completed",
     },
     {
@@ -96,7 +103,8 @@ const projectData = {
       duration: 120,
       startDate: "2024-01-22",
       endDate: "2024-05-21",
-      description: "Irrigation, organic fertilization, natural pest control, and crop monitoring",
+      description:
+        "Irrigation, organic fertilization, natural pest control, and crop monitoring",
       status: "in_progress",
     },
     {
@@ -112,7 +120,8 @@ const projectData = {
       duration: 25,
       startDate: "2024-06-06",
       endDate: "2024-06-30",
-      description: "Milling, packaging, quality certification, and market sales",
+      description:
+        "Milling, packaging, quality certification, and market sales",
       status: "pending",
     },
   ],
@@ -155,19 +164,38 @@ const projectData = {
     },
   ],
   investors: [
-    { address: "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH", amount: 500, date: "2024-01-20" },
-    { address: "rLNaPoKeeBjZe2qs6x52yVPZpZ8td4dc6w", amount: 1000, date: "2024-01-22" },
-    { address: "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh", amount: 250, date: "2024-01-25" },
+    {
+      address: "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",
+      amount: 500,
+      date: "2024-01-20",
+    },
+    {
+      address: "rLNaPoKeeBjZe2qs6x52yVPZpZ8td4dc6w",
+      amount: 1000,
+      date: "2024-01-22",
+    },
+    {
+      address: "rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh",
+      amount: 250,
+      date: "2024-01-25",
+    },
   ],
-}
+};
 
-export default function ProjectDetailPage({ params }: { params: { id: string } }) {
-  const fundingPercentage = (projectData.financial.currentFunding / projectData.financial.investmentGoal) * 100
+export default function ProjectDetailPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const fundingPercentage =
+    (projectData.financial.currentFunding /
+      projectData.financial.investmentGoal) *
+    100;
 
   return (
     <div className="min-h-screen bg-background">
       <Header
-        title="Agri-Trust"
+        title="AgriVest"
         navLinks={[
           { href: "/projects", label: "Browse Projects", isPrimary: true },
           { href: "/how-it-works", label: "How It Works" },
@@ -203,7 +231,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <div className="space-y-6">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {projectData.images.map((image, index) => (
-                  <div key={index} className={index === 0 ? "col-span-2 row-span-2" : ""}>
+                  <div
+                    key={index}
+                    className={index === 0 ? "col-span-2 row-span-2" : ""}
+                  >
                     <Image
                       src={image || "/placeholder.svg"}
                       alt={`Project image ${index + 1}`}
@@ -229,8 +260,8 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     projectData.riskAssessment.level === "Low"
                       ? "default"
                       : projectData.riskAssessment.level === "Medium"
-                        ? "secondary"
-                        : "destructive"
+                      ? "secondary"
+                      : "destructive"
                   }
                 >
                   {projectData.riskAssessment.level} Risk
@@ -249,15 +280,20 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     {projectData.financial.daysRemaining} days remaining
                   </div>
                 </div>
-                <p className="text-lg text-muted-foreground">{projectData.description}</p>
+                <p className="text-lg text-muted-foreground">
+                  {projectData.description}
+                </p>
               </div>
             </div>
 
             {/* Tabs */}
             <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="grid w-full grid-cols-7"> {/* Adjusted grid columns */}
+              <TabsList className="grid w-full grid-cols-7">
+                {" "}
+                {/* Adjusted grid columns */}
                 <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="timeline">Timeline</TabsTrigger> {/* New Timeline Tab */}
+                <TabsTrigger value="timeline">Timeline</TabsTrigger>{" "}
+                {/* New Timeline Tab */}
                 <TabsTrigger value="farmer">Farmer</TabsTrigger>
                 <TabsTrigger value="financials">Financials</TabsTrigger>
                 <TabsTrigger value="updates">Updates</TabsTrigger>
@@ -285,10 +321,12 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                       </div>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <span className="font-medium">Location:</span> {projectData.location}
+                          <span className="font-medium">Location:</span>{" "}
+                          {projectData.location}
                         </div>
                         <div>
-                          <span className="font-medium">Coordinates:</span> {projectData.coordinates}
+                          <span className="font-medium">Coordinates:</span>{" "}
+                          {projectData.coordinates}
                         </div>
                       </div>
                     </div>
@@ -306,16 +344,28 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-2xl font-bold text-green-600">45</div>
-                        <div className="text-sm text-muted-foreground">Tons Expected</div>
+                        <div className="text-2xl font-bold text-green-600">
+                          45
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Tons Expected
+                        </div>
                       </div>
                       <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-2xl font-bold text-blue-600">$1,200</div>
-                        <div className="text-sm text-muted-foreground">Price per Ton</div>
+                        <div className="text-2xl font-bold text-blue-600">
+                          $1,200
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Price per Ton
+                        </div>
                       </div>
                       <div className="text-center p-4 bg-muted rounded-lg">
-                        <div className="text-2xl font-bold text-purple-600">$54,000</div>
-                        <div className="text-sm text-muted-foreground">Total Revenue</div>
+                        <div className="text-2xl font-bold text-purple-600">
+                          $54,000
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          Total Revenue
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -336,13 +386,19 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                         <div className="flex items-start gap-3">
                           <Shield className="w-5 h-5 text-blue-600 mt-0.5" />
                           <div>
-                            <h4 className="font-medium text-blue-800 mb-2">Blockchain Insurance Protection</h4>
+                            <h4 className="font-medium text-blue-800 mb-2">
+                              Blockchain Insurance Protection
+                            </h4>
                             <p className="text-sm text-blue-700">
-                              If livestock dies or crops are damaged due to unforeseen events such as floods or
-                              droughts, your investment remains protected through insurance coverage. WeGro provides
-                              insurance-backed protection based on the project type and associated risks, in partnership
-                              with Green Delta Insurance Company. In all cases, WeGro insures the farmer's portion of
-                              the investment, helping secure your capital even during unexpected losses.
+                              If livestock dies or crops are damaged due to
+                              unforeseen events such as floods or droughts, your
+                              investment remains protected through insurance
+                              coverage. WeGro provides insurance-backed
+                              protection based on the project type and
+                              associated risks, in partnership with Green Delta
+                              Insurance Company. In all cases, WeGro insures the
+                              farmer's portion of the investment, helping secure
+                              your capital even during unexpected losses.
                             </p>
                           </div>
                         </div>
@@ -350,39 +406,56 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
                       {/* FAQ Section */}
                       <div>
-                        <h4 className="font-medium mb-4">Frequently Asked Questions</h4>
+                        <h4 className="font-medium mb-4">
+                          Frequently Asked Questions
+                        </h4>
                         <div className="space-y-4">
                           <div className="border rounded-lg p-4">
-                            <h5 className="font-medium mb-2">How does the insurance system work?</h5>
+                            <h5 className="font-medium mb-2">
+                              How does the insurance system work?
+                            </h5>
                             <p className="text-sm text-muted-foreground">
-                              Our blockchain-based insurance system automatically triggers payouts when predefined
-                              conditions are met, such as weather data indicating drought or flood conditions. This
+                              Our blockchain-based insurance system
+                              automatically triggers payouts when predefined
+                              conditions are met, such as weather data
+                              indicating drought or flood conditions. This
                               ensures quick and transparent claim processing.
                             </p>
                           </div>
 
                           <div className="border rounded-lg p-4">
-                            <h5 className="font-medium mb-2">What percentage of my investment is covered?</h5>
+                            <h5 className="font-medium mb-2">
+                              What percentage of my investment is covered?
+                            </h5>
                             <p className="text-sm text-muted-foreground">
-                              WeGro insures the farmer's portion of the investment, which typically covers 70-80% of the
-                              total project value, providing substantial protection for your capital investment.
+                              WeGro insures the farmer's portion of the
+                              investment, which typically covers 70-80% of the
+                              total project value, providing substantial
+                              protection for your capital investment.
                             </p>
                           </div>
 
                           <div className="border rounded-lg p-4">
-                            <h5 className="font-medium mb-2">How quickly are insurance claims processed?</h5>
+                            <h5 className="font-medium mb-2">
+                              How quickly are insurance claims processed?
+                            </h5>
                             <p className="text-sm text-muted-foreground">
-                              Thanks to our blockchain integration and partnership with Green Delta Insurance Company,
-                              claims are typically processed within 7-14 days of the triggering event being verified.
+                              Thanks to our blockchain integration and
+                              partnership with Green Delta Insurance Company,
+                              claims are typically processed within 7-14 days of
+                              the triggering event being verified.
                             </p>
                           </div>
 
                           <div className="border rounded-lg p-4">
-                            <h5 className="font-medium mb-2">What events are covered by the insurance?</h5>
+                            <h5 className="font-medium mb-2">
+                              What events are covered by the insurance?
+                            </h5>
                             <p className="text-sm text-muted-foreground">
-                              Coverage includes natural disasters (floods, droughts, storms), disease outbreaks in
-                              livestock, crop failures due to weather conditions, and other unforeseen events specific
-                              to the project type.
+                              Coverage includes natural disasters (floods,
+                              droughts, storms), disease outbreaks in livestock,
+                              crop failures due to weather conditions, and other
+                              unforeseen events specific to the project type.
                             </p>
                           </div>
                         </div>
@@ -403,8 +476,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   </CardHeader>
                   <CardContent>
                     <div className="relative pl-6">
-
-
                       {projectData.timeline.map((item, index) => (
                         <div key={index} className="relative mb-8 last:mb-0">
                           {/* Icon and Vertical Line */}
@@ -428,16 +499,26 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                             {index < projectData.timeline.length - 1 && (
                               <div
                                 className={`w-0.5 flex-grow ${
-                                  item.status === "completed" ? "bg-green-500" : "bg-gray-300 dark:bg-gray-700"
+                                  item.status === "completed"
+                                    ? "bg-green-500"
+                                    : "bg-gray-300 dark:bg-gray-700"
                                 }`}
                               />
                             )}
                           </div>
-                          <div className="ml-10 pt-1"> {/* Added pt-1 to align text with icon center better */}
+                          <div className="ml-10 pt-1">
+                            {" "}
+                            {/* Added pt-1 to align text with icon center better */}
                             <div className="flex items-center mb-1">
-                              <h4 className="font-semibold text-lg mr-2">{item.stage}</h4>
+                              <h4 className="font-semibold text-lg mr-2">
+                                {item.stage}
+                              </h4>
                               <Badge
-                                variant={item.status === "completed" ? "default" : "outline"}
+                                variant={
+                                  item.status === "completed"
+                                    ? "default"
+                                    : "outline"
+                                }
                                 className={`${
                                   item.status === "completed"
                                     ? "bg-green-100 text-green-700 border-green-200"
@@ -447,15 +528,19 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                                 {item.status === "completed"
                                   ? "Completed"
                                   : item.status === "in_progress"
-                                    ? "In Progress"
-                                    : "Pending"}
+                                  ? "In Progress"
+                                  : "Pending"}
                               </Badge>
                             </div>
-                            <p className="text-sm text-muted-foreground mb-1">{item.description}</p>
+                            <p className="text-sm text-muted-foreground mb-1">
+                              {item.description}
+                            </p>
                             <div className="flex items-center text-xs text-muted-foreground">
                               <Calendar className="w-3.5 h-3.5 mr-1.5" />
                               {/* Displaying only start date as per image */}
-                              <span>{new Date(item.startDate).toLocaleDateString()}</span>
+                              <span>
+                                {new Date(item.startDate).toLocaleDateString()}
+                              </span>
                               {/* Original date display: {item.startDate} - {item.endDate} ({item.duration} days) */}
                             </div>
                           </div>
@@ -473,8 +558,12 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-start gap-6">
-                      <Avatar className="w-24 h-24"> {/* Increased avatar size slightly */}
-                        <AvatarImage src={projectData.farmer.avatar || "/placeholder.svg"} />
+                      <Avatar className="w-24 h-24">
+                        {" "}
+                        {/* Increased avatar size slightly */}
+                        <AvatarImage
+                          src={projectData.farmer.avatar || "/placeholder.svg"}
+                        />
                         <AvatarFallback>
                           {projectData.farmer.name
                             .split(" ")
@@ -484,13 +573,20 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                       </Avatar>
                       <div className="flex-1 space-y-3">
                         <div className="flex items-center gap-2">
-                          <h3 className="text-2xl font-semibold">{projectData.farmer.name}</h3>
+                          <h3 className="text-2xl font-semibold">
+                            {projectData.farmer.name}
+                          </h3>
                           <div className="flex items-center gap-1 text-yellow-500">
                             <Star className="w-5 h-5 fill-current" />
-                            <span className="font-semibold">{projectData.farmer.rating}</span>
+                            <span className="font-semibold">
+                              {projectData.farmer.rating}
+                            </span>
                           </div>
                           {projectData.farmer.verified && (
-                            <Badge variant="default" className="bg-green-100 text-green-700 border-green-200 ml-2">
+                            <Badge
+                              variant="default"
+                              className="bg-green-100 text-green-700 border-green-200 ml-2"
+                            >
                               <CheckCircle className="w-3 h-3 mr-1" />
                               Verified
                             </Badge>
@@ -499,15 +595,21 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                         <div className="flex items-center gap-6 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1.5">
                             <Users className="w-4 h-4" />
-                            <span>{projectData.farmer.experience} years experience</span>
+                            <span>
+                              {projectData.farmer.experience} years experience
+                            </span>
                           </div>
                           <div className="flex items-center gap-1.5">
                             <Target className="w-4 h-4" />
-                            <span>{projectData.farmer.previousProjects} projects completed</span>
+                            <span>
+                              {projectData.farmer.previousProjects} projects
+                              completed
+                            </span>
                           </div>
                         </div>
                         <p className="text-muted-foreground">
-                          {projectData.farmer.description || "No description available."}
+                          {projectData.farmer.description ||
+                            "No description available."}
                         </p>
                       </div>
                     </div>
@@ -554,20 +656,36 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
                       <div>
-                        <Label className="text-sm text-muted-foreground">Yield Estimate</Label>
-                        <p className="text-lg font-medium">2,500 lbs per hectare</p>
+                        <Label className="text-sm text-muted-foreground">
+                          Yield Estimate
+                        </Label>
+                        <p className="text-lg font-medium">
+                          2,500 lbs per hectare
+                        </p>
                       </div>
                       <div>
-                        <Label className="text-sm text-muted-foreground">Market Price</Label>
-                        <p className="text-lg font-medium">$6.50 per lb (Fair Trade Organic)</p>
+                        <Label className="text-sm text-muted-foreground">
+                          Market Price
+                        </Label>
+                        <p className="text-lg font-medium">
+                          $6.50 per lb (Fair Trade Organic)
+                        </p>
                       </div>
                       <div>
-                        <Label className="text-sm text-muted-foreground">Revenue Projection</Label>
-                        <p className="text-lg font-medium text-green-600">$22,500</p>
+                        <Label className="text-sm text-muted-foreground">
+                          Revenue Projection
+                        </Label>
+                        <p className="text-lg font-medium text-green-600">
+                          $22,500
+                        </p>
                       </div>
                       <div>
-                        <Label className="text-sm text-muted-foreground">Profit Margin</Label>
-                        <p className="text-lg font-medium text-green-600">35%</p>
+                        <Label className="text-sm text-muted-foreground">
+                          Profit Margin
+                        </Label>
+                        <p className="text-lg font-medium text-green-600">
+                          35%
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -582,7 +700,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-muted-foreground">Seeds & Materials</span>
+                      <span className="text-muted-foreground">
+                        Seeds & Materials
+                      </span>
                       <span className="font-medium">$2,000</span>
                     </div>
                     <div className="flex justify-between items-center">
@@ -604,8 +724,6 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     </div>
                   </CardContent>
                 </Card>
-
-          
 
                 {/* <Card>
                   <CardHeader>
@@ -649,8 +767,12 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     <CardHeader>
                       <div className="flex justify-between items-start">
                         <div>
-                          <CardTitle className="text-lg">{update.title}</CardTitle>
-                          <div className="text-sm text-muted-foreground">{update.date}</div>
+                          <CardTitle className="text-lg">
+                            {update.title}
+                          </CardTitle>
+                          <div className="text-sm text-muted-foreground">
+                            {update.date}
+                          </div>
                         </div>
                         <Badge variant="outline">{update.milestone}</Badge>
                       </div>
@@ -687,15 +809,23 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <CardContent>
                     <div className="space-y-4">
                       {projectData.investors.map((investor, index) => (
-                        <div key={index} className="flex justify-between items-center p-3 border rounded-lg">
+                        <div
+                          key={index}
+                          className="flex justify-between items-center p-3 border rounded-lg"
+                        >
                           <div>
                             <div className="font-mono text-sm">
-                              {investor.address.slice(0, 8)}...{investor.address.slice(-8)}
+                              {investor.address.slice(0, 8)}...
+                              {investor.address.slice(-8)}
                             </div>
-                            <div className="text-xs text-muted-foreground">{investor.date}</div>
+                            <div className="text-xs text-muted-foreground">
+                              {investor.date}
+                            </div>
                           </div>
                           <div className="text-right">
-                            <div className="font-medium">${investor.amount} RLUSD</div>
+                            <div className="font-medium">
+                              ${investor.amount} RLUSD
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -719,7 +849,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                           <FileText className="w-5 h-5 text-muted-foreground" />
                           <div>
                             <div className="font-medium">Business Plan</div>
-                            <div className="text-sm text-muted-foreground">Detailed project business plan</div>
+                            <div className="text-sm text-muted-foreground">
+                              Detailed project business plan
+                            </div>
                           </div>
                         </div>
                         <Button variant="outline" size="sm">
@@ -730,8 +862,12 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                         <div className="flex items-center gap-3">
                           <FileText className="w-5 h-5 text-muted-foreground" />
                           <div>
-                            <div className="font-medium">Land Ownership Certificate</div>
-                            <div className="text-sm text-muted-foreground">Verified land ownership documents</div>
+                            <div className="font-medium">
+                              Land Ownership Certificate
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              Verified land ownership documents
+                            </div>
                           </div>
                         </div>
                         <Button variant="outline" size="sm">
@@ -742,8 +878,12 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                         <div className="flex items-center gap-3">
                           <FileText className="w-5 h-5 text-muted-foreground" />
                           <div>
-                            <div className="font-medium">Organic Certification</div>
-                            <div className="text-sm text-muted-foreground">Organic farming certification</div>
+                            <div className="font-medium">
+                              Organic Certification
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              Organic farming certification
+                            </div>
                           </div>
                         </div>
                         <Button variant="outline" size="sm">
@@ -772,8 +912,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <div className="flex justify-between text-sm mb-2">
                     <span>Funding Progress</span>
                     <span className="font-medium">
-                      ${projectData.financial.currentFunding.toLocaleString()} / $
-                      {projectData.financial.investmentGoal.toLocaleString()} RLUSD
+                      ${projectData.financial.currentFunding.toLocaleString()} /
+                      ${projectData.financial.investmentGoal.toLocaleString()}{" "}
+                      RLUSD
                     </span>
                   </div>
                   <Progress value={fundingPercentage} className="h-3 mb-2" />
@@ -786,28 +927,35 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 {/* Key Stats */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-3 bg-muted rounded-lg">
-                    <div className="text-xl font-bold text-green-600">{projectData.financial.expectedROI}%</div>
-                    <div className="text-xs text-muted-foreground">Expected ROI</div>
+                    <div className="text-xl font-bold text-green-600">
+                      {projectData.financial.expectedROI}%
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      Expected ROI
+                    </div>
                   </div>
                   <div className="text-center p-3 bg-muted rounded-lg">
-                    <div className="text-xl font-bold text-blue-600">{projectData.financial.daysRemaining}</div>
-                    <div className="text-xs text-muted-foreground">Days Left</div>
+                    <div className="text-xl font-bold text-blue-600">
+                      {projectData.financial.daysRemaining}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      Days Left
+                    </div>
                   </div>
                 </div>
 
                 {/* Investment Calculator */}
                 <div className="space-y-4">
-                  <Label htmlFor="investment-amount">Investment Amount (RLUSD)</Label>
+                  <Label htmlFor="investment-amount">
+                    Investment Amount (RLUSD)
+                  </Label>
                   <Input
                     id="investment-amount"
                     type="number"
                     placeholder={`Min: $${projectData.financial.minimumInvestment}`}
                     min={projectData.financial.minimumInvestment}
                   />
-
                 </div>
-
-              
 
                 {/* Investment Button */}
                 <Button className="w-full" size="lg">
@@ -831,7 +979,9 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               <CardContent className="space-y-4">
                 <div className="flex items-center gap-3">
                   <Avatar>
-                    <AvatarImage src={projectData.farmer.avatar || "/placeholder.svg"} />
+                    <AvatarImage
+                      src={projectData.farmer.avatar || "/placeholder.svg"}
+                    />
                     <AvatarFallback>
                       {projectData.farmer.name
                         .split(" ")
@@ -857,5 +1007,5 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
         </div>
       </div>
     </div>
-  )
+  );
 }

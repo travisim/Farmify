@@ -1,17 +1,29 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import Header from "@/components/header"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import Link from "next/link";
+import Header from "@/components/header";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,8 +31,15 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+} from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   AlertTriangle,
   CheckCircle,
@@ -39,7 +58,7 @@ import {
   Calendar,
   MessageSquare,
   Shield,
-} from "lucide-react"
+} from "lucide-react";
 
 // Mock admin data
 const adminData = {
@@ -240,7 +259,7 @@ const adminData = {
       status: "away",
     },
   ],
-}
+};
 
 function PriorityBadge({ priority }: { priority: string }) {
   const variants = {
@@ -249,7 +268,7 @@ function PriorityBadge({ priority }: { priority: string }) {
     medium: "outline",
     standard: "default",
     expedited: "default",
-  } as const
+  } as const;
 
   const colors = {
     urgent: "bg-red-100 text-red-800 border-red-200",
@@ -257,13 +276,15 @@ function PriorityBadge({ priority }: { priority: string }) {
     medium: "bg-yellow-100 text-yellow-800 border-yellow-200",
     standard: "bg-blue-100 text-blue-800 border-blue-200",
     expedited: "bg-green-100 text-green-800 border-green-200",
-  } as const
+  } as const;
 
   return (
-    <Badge className={colors[priority as keyof typeof colors] || colors.standard}>
+    <Badge
+      className={colors[priority as keyof typeof colors] || colors.standard}
+    >
       {priority.charAt(0).toUpperCase() + priority.slice(1)}
     </Badge>
-  )
+  );
 }
 
 function StatusBadge({ status }: { status: string }) {
@@ -272,33 +293,35 @@ function StatusBadge({ status }: { status: string }) {
     in_review: "bg-blue-100 text-blue-800 border-blue-200",
     completed: "bg-green-100 text-green-800 border-green-200",
     rejected: "bg-red-100 text-red-800 border-red-200",
-  } as const
+  } as const;
 
   return (
     <Badge className={colors[status as keyof typeof colors] || colors.pending}>
-      {status.replace("_", " ").charAt(0).toUpperCase() + status.replace("_", " ").slice(1)}
+      {status.replace("_", " ").charAt(0).toUpperCase() +
+        status.replace("_", " ").slice(1)}
     </Badge>
-  )
+  );
 }
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("overview")
-  const [queueFilter, setQueueFilter] = useState("all")
-  const [searchTerm, setSearchTerm] = useState("")
+  const [activeTab, setActiveTab] = useState("overview");
+  const [queueFilter, setQueueFilter] = useState("all");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredQueue = adminData.verificationQueue.filter((item) => {
-    const matchesFilter = queueFilter === "all" || item.priority === queueFilter
+    const matchesFilter =
+      queueFilter === "all" || item.priority === queueFilter;
     const matchesSearch =
       searchTerm === "" ||
       item.projectTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.farmerName.toLowerCase().includes(searchTerm.toLowerCase())
-    return matchesFilter && matchesSearch
-  })
+      item.farmerName.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
 
   return (
     <div className="min-h-screen bg-background">
       <Header
-        title="Agri-Trust Admin"
+        title="AgriVest Admin"
         navLinks={[
           { href: "/projects", label: "Browse Projects" },
           { href: "/admin", label: "Admin Portal", isPrimary: true },
@@ -333,7 +356,9 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-3xl font-bold mb-2">Admin Dashboard</h1>
-            <p className="text-muted-foreground">Settlement verification and platform management</p>
+            <p className="text-muted-foreground">
+              Settlement verification and platform management
+            </p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline">
@@ -347,7 +372,11 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="space-y-8"
+        >
           <TabsList className="grid w-full grid-cols-4 max-w-2xl">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="verification">Verification Queue</TabsTrigger>
@@ -360,45 +389,69 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Pending Verifications</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Pending Verifications
+                  </CardTitle>
                   <Clock className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-orange-600">{adminData.overview.pendingVerifications}</div>
-                  <p className="text-xs text-muted-foreground">Awaiting verification</p>
+                  <div className="text-2xl font-bold text-orange-600">
+                    {adminData.overview.pendingVerifications}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Awaiting verification
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Completed Settlements</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Completed Settlements
+                  </CardTitle>
                   <CheckCircle className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-green-600">{adminData.overview.completedSettlements}</div>
-                  <p className="text-xs text-muted-foreground">Total processed</p>
+                  <div className="text-2xl font-bold text-green-600">
+                    {adminData.overview.completedSettlements}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Total processed
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Avg Verification Time</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Avg Verification Time
+                  </CardTitle>
                   <Zap className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{adminData.overview.averageVerificationTime}h</div>
-                  <p className="text-xs text-muted-foreground">Average processing time</p>
+                  <div className="text-2xl font-bold">
+                    {adminData.overview.averageVerificationTime}h
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Average processing time
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Platform Revenue</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Platform Revenue
+                  </CardTitle>
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">${adminData.overview.platformRevenue.toLocaleString()}</div>
-                  <p className="text-xs text-muted-foreground">Total fees collected</p>
+                  <div className="text-2xl font-bold">
+                    ${adminData.overview.platformRevenue.toLocaleString()}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Total fees collected
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -410,7 +463,9 @@ export default function AdminDashboard() {
                   <AlertTriangle className="w-5 h-5 text-orange-500" />
                   Urgent Actions Required
                 </CardTitle>
-                <CardDescription>High-priority items requiring immediate attention</CardDescription>
+                <CardDescription>
+                  High-priority items requiring immediate attention
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -421,8 +476,8 @@ export default function AdminDashboard() {
                         action.priority === "urgent"
                           ? "bg-red-50 border-red-200"
                           : action.priority === "high"
-                            ? "bg-orange-50 border-orange-200"
-                            : "bg-yellow-50 border-yellow-200"
+                          ? "bg-orange-50 border-orange-200"
+                          : "bg-yellow-50 border-yellow-200"
                       }`}
                     >
                       <div className="flex justify-between items-start">
@@ -431,12 +486,20 @@ export default function AdminDashboard() {
                             <h4 className="font-medium">{action.title}</h4>
                             <PriorityBadge priority={action.priority} />
                           </div>
-                          <p className="text-sm text-muted-foreground mb-2">{action.description}</p>
+                          <p className="text-sm text-muted-foreground mb-2">
+                            {action.description}
+                          </p>
                           <div className="flex items-center gap-4 text-xs text-muted-foreground">
                             {action.daysOverdue > 0 && (
-                              <span className="text-red-600 font-medium">{action.daysOverdue} days overdue</span>
+                              <span className="text-red-600 font-medium">
+                                {action.daysOverdue} days overdue
+                              </span>
                             )}
-                            {action.amount > 0 && <span>Value: ${action.amount.toLocaleString()} RLUSD</span>}
+                            {action.amount > 0 && (
+                              <span>
+                                Value: ${action.amount.toLocaleString()} RLUSD
+                              </span>
+                            )}
                           </div>
                         </div>
                         <div className="flex gap-2">
@@ -463,25 +526,39 @@ export default function AdminDashboard() {
               <Card>
                 <CardHeader>
                   <CardTitle>Today's Performance</CardTitle>
-                  <CardDescription>Current day verification metrics</CardDescription>
+                  <CardDescription>
+                    Current day verification metrics
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">Verifications Completed</span>
-                      <span className="text-2xl font-bold text-green-600">{adminData.overview.todayVerifications}</span>
+                      <span className="text-sm font-medium">
+                        Verifications Completed
+                      </span>
+                      <span className="text-2xl font-bold text-green-600">
+                        {adminData.overview.todayVerifications}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium">Weekly Volume</span>
-                      <span className="text-lg font-bold">${adminData.overview.weeklyVolume.toLocaleString()}</span>
+                      <span className="text-lg font-bold">
+                        ${adminData.overview.weeklyVolume.toLocaleString()}
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm font-medium">Success Rate</span>
-                      <span className="text-lg font-bold text-green-600">{adminData.overview.successRate}%</span>
+                      <span className="text-lg font-bold text-green-600">
+                        {adminData.overview.successRate}%
+                      </span>
                     </div>
                     <div className="flex justify-between items-center">
-                      <span className="text-sm font-medium">Avg Project ROI</span>
-                      <span className="text-lg font-bold text-blue-600">{adminData.overview.averageProjectROI}%</span>
+                      <span className="text-sm font-medium">
+                        Avg Project ROI
+                      </span>
+                      <span className="text-lg font-bold text-blue-600">
+                        {adminData.overview.averageProjectROI}%
+                      </span>
                     </div>
                   </div>
                 </CardContent>
@@ -490,26 +567,39 @@ export default function AdminDashboard() {
               <Card>
                 <CardHeader>
                   <CardTitle>Admin Team Status</CardTitle>
-                  <CardDescription>Current team performance and availability</CardDescription>
+                  <CardDescription>
+                    Current team performance and availability
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
                     {adminData.adminTeam.map((admin) => (
-                      <div key={admin.id} className="flex items-center justify-between p-3 border rounded-lg">
+                      <div
+                        key={admin.id}
+                        className="flex items-center justify-between p-3 border rounded-lg"
+                      >
                         <div className="flex items-center gap-3">
                           <div
                             className={`w-2 h-2 rounded-full ${
-                              admin.status === "online" ? "bg-green-500" : "bg-yellow-500"
+                              admin.status === "online"
+                                ? "bg-green-500"
+                                : "bg-yellow-500"
                             }`}
                           />
                           <div>
                             <div className="font-medium">{admin.name}</div>
-                            <div className="text-xs text-muted-foreground">{admin.role}</div>
+                            <div className="text-xs text-muted-foreground">
+                              {admin.role}
+                            </div>
                           </div>
                         </div>
                         <div className="text-right text-sm">
-                          <div className="font-medium">{admin.verificationsToday} today</div>
-                          <div className="text-muted-foreground">{admin.averageTime}h avg</div>
+                          <div className="font-medium">
+                            {admin.verificationsToday} today
+                          </div>
+                          <div className="text-muted-foreground">
+                            {admin.averageTime}h avg
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -522,26 +612,38 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Recent Settlement Activity</CardTitle>
-                <CardDescription>Latest completed verifications</CardDescription>
+                <CardDescription>
+                  Latest completed verifications
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {adminData.completedSettlements.slice(0, 5).map((settlement) => (
-                    <div key={settlement.id} className="flex items-center justify-between p-3 border rounded-lg">
-                      <div className="flex-1">
-                        <div className="font-medium">{settlement.projectTitle}</div>
-                        <div className="text-sm text-muted-foreground">
-                          Farmer: {settlement.farmerName} • {settlement.investorCount} investors
+                  {adminData.completedSettlements
+                    .slice(0, 5)
+                    .map((settlement) => (
+                      <div
+                        key={settlement.id}
+                        className="flex items-center justify-between p-3 border rounded-lg"
+                      >
+                        <div className="flex-1">
+                          <div className="font-medium">
+                            {settlement.projectTitle}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            Farmer: {settlement.farmerName} •{" "}
+                            {settlement.investorCount} investors
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium text-green-600">
+                            ${settlement.actualRevenue.toLocaleString()} RLUSD
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Verified in {settlement.verificationTime}h
+                          </div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="font-medium text-green-600">
-                          ${settlement.actualRevenue.toLocaleString()} RLUSD
-                        </div>
-                        <div className="text-xs text-muted-foreground">Verified in {settlement.verificationTime}h</div>
-                      </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </CardContent>
             </Card>
@@ -605,8 +707,12 @@ export default function AdminDashboard() {
             {/* Verification Queue Table */}
             <Card>
               <CardHeader>
-                <CardTitle>Pending Verifications ({filteredQueue.length})</CardTitle>
-                <CardDescription>Settlements awaiting admin verification</CardDescription>
+                <CardTitle>
+                  Pending Verifications ({filteredQueue.length})
+                </CardTitle>
+                <CardDescription>
+                  Settlements awaiting admin verification
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <Table>
@@ -626,9 +732,12 @@ export default function AdminDashboard() {
                       <TableRow key={item.id}>
                         <TableCell>
                           <div>
-                            <div className="font-medium">{item.projectTitle}</div>
+                            <div className="font-medium">
+                              {item.projectTitle}
+                            </div>
                             <div className="text-sm text-muted-foreground">
-                              {item.investorCount} investors • ${item.projectValue.toLocaleString()} project value
+                              {item.investorCount} investors • $
+                              {item.projectValue.toLocaleString()} project value
                             </div>
                           </div>
                         </TableCell>
@@ -636,21 +745,31 @@ export default function AdminDashboard() {
                           <div>
                             <div className="font-medium">{item.farmerName}</div>
                             <div className="text-xs text-muted-foreground font-mono">
-                              {item.farmerAddress.slice(0, 8)}...{item.farmerAddress.slice(-8)}
+                              {item.farmerAddress.slice(0, 8)}...
+                              {item.farmerAddress.slice(-8)}
                             </div>
                           </div>
                         </TableCell>
                         <TableCell>
                           <div>
-                            <div className="text-sm">{new Date(item.submissionDate).toLocaleDateString()}</div>
+                            <div className="text-sm">
+                              {new Date(
+                                item.submissionDate
+                              ).toLocaleDateString()}
+                            </div>
                             <div className="text-xs text-muted-foreground">
-                              {item.daysWaiting} day{item.daysWaiting !== 1 ? "s" : ""} ago
+                              {item.daysWaiting} day
+                              {item.daysWaiting !== 1 ? "s" : ""} ago
                             </div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <div className="font-medium">${item.reportedRevenue.toLocaleString()}</div>
-                          <div className="text-xs text-muted-foreground">RLUSD</div>
+                          <div className="font-medium">
+                            ${item.reportedRevenue.toLocaleString()}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            RLUSD
+                          </div>
                         </TableCell>
                         <TableCell>
                           <PriorityBadge priority={item.priority} />
@@ -685,7 +804,9 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Batch Actions</CardTitle>
-                <CardDescription>Perform actions on multiple settlements</CardDescription>
+                <CardDescription>
+                  Perform actions on multiple settlements
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex gap-4">
@@ -717,11 +838,15 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Projects
+                  </CardTitle>
                   <BarChart3 className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{adminData.platformMetrics.totalProjects}</div>
+                  <div className="text-2xl font-bold">
+                    {adminData.platformMetrics.totalProjects}
+                  </div>
                   <p className="text-xs text-muted-foreground">
                     {adminData.platformMetrics.activeProjects} currently active
                   </p>
@@ -730,36 +855,56 @@ export default function AdminDashboard() {
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Investors</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Investors
+                  </CardTitle>
                   <Users className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{adminData.platformMetrics.totalInvestors.toLocaleString()}</div>
-                  <p className="text-xs text-muted-foreground">Platform participants</p>
+                  <div className="text-2xl font-bold">
+                    {adminData.platformMetrics.totalInvestors.toLocaleString()}
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Platform participants
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Volume</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Total Volume
+                  </CardTitle>
                   <DollarSign className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    ${(adminData.platformMetrics.totalVolume / 1000000).toFixed(1)}M
+                    $
+                    {(adminData.platformMetrics.totalVolume / 1000000).toFixed(
+                      1
+                    )}
+                    M
                   </div>
-                  <p className="text-xs text-muted-foreground">RLUSD processed</p>
+                  <p className="text-xs text-muted-foreground">
+                    RLUSD processed
+                  </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Monthly Growth</CardTitle>
+                  <CardTitle className="text-sm font-medium">
+                    Monthly Growth
+                  </CardTitle>
                   <TrendingUp className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold text-green-600">+{adminData.platformMetrics.monthlyGrowth}%</div>
-                  <p className="text-xs text-muted-foreground">Platform growth rate</p>
+                  <div className="text-2xl font-bold text-green-600">
+                    +{adminData.platformMetrics.monthlyGrowth}%
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Platform growth rate
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -768,23 +913,35 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Verification Performance Metrics</CardTitle>
-                <CardDescription>Admin team performance and accuracy statistics</CardDescription>
+                <CardDescription>
+                  Admin team performance and accuracy statistics
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-green-600">{adminData.overview.successRate}%</div>
-                    <div className="text-sm text-muted-foreground">Settlement Accuracy</div>
+                    <div className="text-3xl font-bold text-green-600">
+                      {adminData.overview.successRate}%
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Settlement Accuracy
+                    </div>
                   </div>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-blue-600">
                       {adminData.overview.averageVerificationTime}h
                     </div>
-                    <div className="text-sm text-muted-foreground">Average Verification Time</div>
+                    <div className="text-sm text-muted-foreground">
+                      Average Verification Time
+                    </div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600">{adminData.platformMetrics.disputeRate}%</div>
-                    <div className="text-sm text-muted-foreground">Dispute Rate</div>
+                    <div className="text-3xl font-bold text-purple-600">
+                      {adminData.platformMetrics.disputeRate}%
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Dispute Rate
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -794,30 +951,44 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Platform Health Indicators</CardTitle>
-                <CardDescription>Key performance indicators for platform stability</CardDescription>
+                <CardDescription>
+                  Key performance indicators for platform stability
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Settlement Success Rate</span>
+                    <span className="text-sm font-medium">
+                      Settlement Success Rate
+                    </span>
                     <div className="flex items-center gap-2">
-                      <Progress value={adminData.overview.successRate} className="w-32" />
-                      <span className="text-sm font-bold">{adminData.overview.successRate}%</span>
+                      <Progress
+                        value={adminData.overview.successRate}
+                        className="w-32"
+                      />
+                      <span className="text-sm font-bold">
+                        {adminData.overview.successRate}%
+                      </span>
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">Average Project Success</span>
+                    <span className="text-sm font-medium">
+                      Average Project Success
+                    </span>
                     <div className="flex items-center gap-2">
                       <Progress
                         value={
-                          (adminData.platformMetrics.successfulProjects / adminData.platformMetrics.totalProjects) * 100
+                          (adminData.platformMetrics.successfulProjects /
+                            adminData.platformMetrics.totalProjects) *
+                          100
                         }
                         className="w-32"
                       />
                       <span className="text-sm font-bold">
                         {Math.round(
-                          (adminData.platformMetrics.successfulProjects / adminData.platformMetrics.totalProjects) *
-                            100,
+                          (adminData.platformMetrics.successfulProjects /
+                            adminData.platformMetrics.totalProjects) *
+                            100
                         )}
                         %
                       </span>
@@ -831,7 +1002,9 @@ export default function AdminDashboard() {
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-sm font-medium">IPFS Availability</span>
+                    <span className="text-sm font-medium">
+                      IPFS Availability
+                    </span>
                     <div className="flex items-center gap-2">
                       <Progress value={99.9} className="w-32" />
                       <span className="text-sm font-bold">99.9%</span>
@@ -845,7 +1018,9 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Generate Reports</CardTitle>
-                <CardDescription>Export detailed analytics and compliance reports</CardDescription>
+                <CardDescription>
+                  Export detailed analytics and compliance reports
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -856,9 +1031,15 @@ export default function AdminDashboard() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="financial">Financial Report</SelectItem>
-                        <SelectItem value="compliance">Compliance Report</SelectItem>
-                        <SelectItem value="performance">Performance Report</SelectItem>
+                        <SelectItem value="financial">
+                          Financial Report
+                        </SelectItem>
+                        <SelectItem value="compliance">
+                          Compliance Report
+                        </SelectItem>
+                        <SelectItem value="performance">
+                          Performance Report
+                        </SelectItem>
                         <SelectItem value="audit">Audit Report</SelectItem>
                       </SelectContent>
                     </Select>
@@ -899,7 +1080,9 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>User Management</CardTitle>
-                <CardDescription>Manage farmer and investor accounts</CardDescription>
+                <CardDescription>
+                  Manage farmer and investor accounts
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -923,25 +1106,56 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Platform Settings</CardTitle>
-                <CardDescription>Configure settlement parameters and platform behavior</CardDescription>
+                <CardDescription>
+                  Configure settlement parameters and platform behavior
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <Label htmlFor="verification-timeout">Verification Timeout (hours)</Label>
-                    <Input id="verification-timeout" type="number" defaultValue="48" className="mt-2" />
+                    <Label htmlFor="verification-timeout">
+                      Verification Timeout (hours)
+                    </Label>
+                    <Input
+                      id="verification-timeout"
+                      type="number"
+                      defaultValue="48"
+                      className="mt-2"
+                    />
                   </div>
                   <div>
-                    <Label htmlFor="platform-fee">Platform Commission (%)</Label>
-                    <Input id="platform-fee" type="number" defaultValue="2.5" step="0.1" className="mt-2" />
+                    <Label htmlFor="platform-fee">
+                      Platform Commission (%)
+                    </Label>
+                    <Input
+                      id="platform-fee"
+                      type="number"
+                      defaultValue="2.5"
+                      step="0.1"
+                      className="mt-2"
+                    />
                   </div>
                   <div>
-                    <Label htmlFor="min-investment">Minimum Investment (RLUSD)</Label>
-                    <Input id="min-investment" type="number" defaultValue="100" className="mt-2" />
+                    <Label htmlFor="min-investment">
+                      Minimum Investment (RLUSD)
+                    </Label>
+                    <Input
+                      id="min-investment"
+                      type="number"
+                      defaultValue="100"
+                      className="mt-2"
+                    />
                   </div>
                   <div>
-                    <Label htmlFor="max-project-size">Maximum Project Size (RLUSD)</Label>
-                    <Input id="max-project-size" type="number" defaultValue="100000" className="mt-2" />
+                    <Label htmlFor="max-project-size">
+                      Maximum Project Size (RLUSD)
+                    </Label>
+                    <Input
+                      id="max-project-size"
+                      type="number"
+                      defaultValue="100000"
+                      className="mt-2"
+                    />
                   </div>
                 </div>
                 <Button>Save Settings</Button>
@@ -952,7 +1166,9 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>System Status</CardTitle>
-                <CardDescription>Monitor platform infrastructure and services</CardDescription>
+                <CardDescription>
+                  Monitor platform infrastructure and services
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
@@ -961,7 +1177,9 @@ export default function AdminDashboard() {
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       <div>
                         <div className="font-medium">XRPL Network</div>
-                        <div className="text-sm text-muted-foreground">Connected to mainnet</div>
+                        <div className="text-sm text-muted-foreground">
+                          Connected to mainnet
+                        </div>
                       </div>
                     </div>
                     <Badge variant="default">Operational</Badge>
@@ -972,7 +1190,9 @@ export default function AdminDashboard() {
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       <div>
                         <div className="font-medium">IPFS Network</div>
-                        <div className="text-sm text-muted-foreground">Document storage active</div>
+                        <div className="text-sm text-muted-foreground">
+                          Document storage active
+                        </div>
                       </div>
                     </div>
                     <Badge variant="default">Operational</Badge>
@@ -983,7 +1203,9 @@ export default function AdminDashboard() {
                       <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                       <div>
                         <div className="font-medium">Database Cache</div>
-                        <div className="text-sm text-muted-foreground">High memory usage detected</div>
+                        <div className="text-sm text-muted-foreground">
+                          High memory usage detected
+                        </div>
                       </div>
                     </div>
                     <Badge variant="secondary">Warning</Badge>
@@ -994,7 +1216,9 @@ export default function AdminDashboard() {
                       <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                       <div>
                         <div className="font-medium">API Services</div>
-                        <div className="text-sm text-muted-foreground">All endpoints responding</div>
+                        <div className="text-sm text-muted-foreground">
+                          All endpoints responding
+                        </div>
                       </div>
                     </div>
                     <Badge variant="default">Operational</Badge>
@@ -1007,14 +1231,18 @@ export default function AdminDashboard() {
             <Card>
               <CardHeader>
                 <CardTitle>Maintenance & Updates</CardTitle>
-                <CardDescription>System maintenance and update management</CardDescription>
+                <CardDescription>
+                  System maintenance and update management
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
                       <div className="font-medium">Maintenance Mode</div>
-                      <div className="text-sm text-muted-foreground">Enable maintenance mode for system updates</div>
+                      <div className="text-sm text-muted-foreground">
+                        Enable maintenance mode for system updates
+                      </div>
                     </div>
                     <Button variant="outline">
                       <Settings className="w-4 h-4 mr-2" />
@@ -1025,7 +1253,9 @@ export default function AdminDashboard() {
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
                       <div className="font-medium">Backup System</div>
-                      <div className="text-sm text-muted-foreground">Last backup: 2 hours ago</div>
+                      <div className="text-sm text-muted-foreground">
+                        Last backup: 2 hours ago
+                      </div>
                     </div>
                     <Button variant="outline">
                       <Download className="w-4 h-4 mr-2" />
@@ -1036,7 +1266,9 @@ export default function AdminDashboard() {
                   <div className="flex items-center justify-between p-4 border rounded-lg">
                     <div>
                       <div className="font-medium">System Logs</div>
-                      <div className="text-sm text-muted-foreground">View and export system logs</div>
+                      <div className="text-sm text-muted-foreground">
+                        View and export system logs
+                      </div>
                     </div>
                     <Button variant="outline">
                       <FileText className="w-4 h-4 mr-2" />
@@ -1050,5 +1282,5 @@ export default function AdminDashboard() {
         </Tabs>
       </div>
     </div>
-  )
+  );
 }

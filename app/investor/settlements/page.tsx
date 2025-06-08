@@ -1,14 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import Header from "@/components/header"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useState } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import Header from "@/components/header";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   Leaf,
   Search,
@@ -22,7 +35,7 @@ import {
   TrendingUp,
   Filter,
   Eye,
-} from "lucide-react"
+} from "lucide-react";
 
 // Mock settlement data
 const settlementData = {
@@ -101,7 +114,7 @@ const settlementData = {
       expectedSubmissionDate: "2024-07-20",
     },
   ],
-}
+};
 
 function StatusBadge({ status }: { status: string }) {
   if (status === "completed") {
@@ -110,45 +123,49 @@ function StatusBadge({ status }: { status: string }) {
         <CheckCircle className="w-3 h-3 mr-1" />
         Completed
       </Badge>
-    )
+    );
   } else if (status === "verification_pending") {
     return (
       <Badge className="bg-blue-100 text-blue-800 border-blue-200">
         <Clock className="w-3 h-3 mr-1" />
         Verification Pending
       </Badge>
-    )
+    );
   } else if (status === "harvesting") {
     return (
       <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
         <Calendar className="w-3 h-3 mr-1" />
         Harvesting
       </Badge>
-    )
+    );
   }
-  return <Badge>{status}</Badge>
+  return <Badge>{status}</Badge>;
 }
 
 export default function InvestorSettlementsPage() {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [activeTab, setActiveTab] = useState("completed")
+  const [searchTerm, setSearchTerm] = useState("");
+  const [activeTab, setActiveTab] = useState("completed");
 
   const filteredCompletedSettlements = settlementData.completed.filter(
     (settlement) =>
-      settlement.projectTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      settlement.farmerName.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+      settlement.projectTitle
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      settlement.farmerName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const filteredPendingSettlements = settlementData.pending.filter(
     (settlement) =>
-      settlement.projectTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      settlement.farmerName.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+      settlement.projectTitle
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      settlement.farmerName.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="min-h-screen bg-background">
       <Header
-        title="Agri-Trust"
+        title="AgriVest"
         navLinks={[
           { href: "/projects", label: "Browse Projects" },
           { href: "/investor", label: "Investor Dashboard" },
@@ -165,7 +182,9 @@ export default function InvestorSettlementsPage() {
         <div className="flex justify-between items-start mb-8">
           <div>
             <h1 className="text-3xl font-bold mb-2">Settlement Reports</h1>
-            <p className="text-muted-foreground">Track and verify your investment returns</p>
+            <p className="text-muted-foreground">
+              Track and verify your investment returns
+            </p>
           </div>
           <div className="flex gap-2">
             <Button variant="outline">
@@ -193,7 +212,11 @@ export default function InvestorSettlementsPage() {
         </div>
 
         {/* Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+        <Tabs
+          value={activeTab}
+          onValueChange={setActiveTab}
+          className="space-y-6"
+        >
           <TabsList className="grid w-full grid-cols-2 max-w-md">
             <TabsTrigger value="completed">Completed Settlements</TabsTrigger>
             <TabsTrigger value="pending">Pending Settlements</TabsTrigger>
@@ -205,14 +228,19 @@ export default function InvestorSettlementsPage() {
                 <CardContent>
                   <div className="flex flex-col items-center justify-center py-12">
                     <FileText className="w-12 h-12 text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-medium mb-2">No settlements found</h3>
+                    <h3 className="text-lg font-medium mb-2">
+                      No settlements found
+                    </h3>
                     <p className="text-muted-foreground mb-4">
                       {searchTerm
                         ? "No settlements match your search criteria"
                         : "You don't have any completed settlements yet"}
                     </p>
                     {searchTerm && (
-                      <Button variant="outline" onClick={() => setSearchTerm("")}>
+                      <Button
+                        variant="outline"
+                        onClick={() => setSearchTerm("")}
+                      >
                         Clear Search
                       </Button>
                     )}
@@ -227,7 +255,9 @@ export default function InvestorSettlementsPage() {
                       <div className="flex justify-between items-start">
                         <div>
                           <CardTitle>{settlement.projectTitle}</CardTitle>
-                          <CardDescription>Farmer: {settlement.farmerName}</CardDescription>
+                          <CardDescription>
+                            Farmer: {settlement.farmerName}
+                          </CardDescription>
                         </div>
                         <StatusBadge status={settlement.status} />
                       </div>
@@ -237,32 +267,56 @@ export default function InvestorSettlementsPage() {
                         <div className="space-y-4">
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <div className="text-sm text-muted-foreground">Your Investment</div>
-                              <div className="text-lg font-bold">${settlement.investmentAmount} RLUSD</div>
+                              <div className="text-sm text-muted-foreground">
+                                Your Investment
+                              </div>
+                              <div className="text-lg font-bold">
+                                ${settlement.investmentAmount} RLUSD
+                              </div>
                             </div>
                             <div>
-                              <div className="text-sm text-muted-foreground">Total Return</div>
-                              <div className="text-lg font-bold text-green-600">${settlement.returnAmount} RLUSD</div>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <div className="text-sm text-muted-foreground">Profit</div>
-                              <div className="text-lg font-bold text-green-600">+${settlement.profit} RLUSD</div>
-                            </div>
-                            <div>
-                              <div className="text-sm text-muted-foreground">ROI</div>
-                              <div className="text-lg font-bold text-green-600">+{settlement.roi}%</div>
+                              <div className="text-sm text-muted-foreground">
+                                Total Return
+                              </div>
+                              <div className="text-lg font-bold text-green-600">
+                                ${settlement.returnAmount} RLUSD
+                              </div>
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <div className="text-sm text-muted-foreground">Completion Date</div>
-                              <div className="text-sm">{settlement.completionDate}</div>
+                              <div className="text-sm text-muted-foreground">
+                                Profit
+                              </div>
+                              <div className="text-lg font-bold text-green-600">
+                                +${settlement.profit} RLUSD
+                              </div>
                             </div>
                             <div>
-                              <div className="text-sm text-muted-foreground">Verification Date</div>
-                              <div className="text-sm">{settlement.verificationDate}</div>
+                              <div className="text-sm text-muted-foreground">
+                                ROI
+                              </div>
+                              <div className="text-lg font-bold text-green-600">
+                                +{settlement.roi}%
+                              </div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <div className="text-sm text-muted-foreground">
+                                Completion Date
+                              </div>
+                              <div className="text-sm">
+                                {settlement.completionDate}
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-sm text-muted-foreground">
+                                Verification Date
+                              </div>
+                              <div className="text-sm">
+                                {settlement.verificationDate}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -271,24 +325,39 @@ export default function InvestorSettlementsPage() {
                             <div className="flex items-start gap-3">
                               <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
                               <div>
-                                <h4 className="font-medium text-green-800">Verified Settlement</h4>
+                                <h4 className="font-medium text-green-800">
+                                  Verified Settlement
+                                </h4>
                                 <p className="text-sm text-green-700">
-                                  This settlement has been verified by platform administrators and the returns have been
+                                  This settlement has been verified by platform
+                                  administrators and the returns have been
                                   distributed to your wallet.
                                 </p>
                               </div>
                             </div>
                           </div>
                           <div className="flex flex-col gap-2">
-                            <Button variant="outline" size="sm" className="justify-start">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="justify-start"
+                            >
                               <FileText className="w-4 h-4 mr-2" />
                               View Settlement Report
                             </Button>
-                            <Button variant="outline" size="sm" className="justify-start">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="justify-start"
+                            >
                               <ExternalLink className="w-4 h-4 mr-2" />
                               View on XRPL Explorer
                             </Button>
-                            <Button variant="outline" size="sm" className="justify-start">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="justify-start"
+                            >
                               <ExternalLink className="w-4 h-4 mr-2" />
                               View Document on IPFS
                             </Button>
@@ -308,14 +377,19 @@ export default function InvestorSettlementsPage() {
                 <CardContent>
                   <div className="flex flex-col items-center justify-center py-12">
                     <Clock className="w-12 h-12 text-muted-foreground mb-4" />
-                    <h3 className="text-lg font-medium mb-2">No pending settlements</h3>
+                    <h3 className="text-lg font-medium mb-2">
+                      No pending settlements
+                    </h3>
                     <p className="text-muted-foreground mb-4">
                       {searchTerm
                         ? "No pending settlements match your search criteria"
                         : "You don't have any pending settlements at the moment"}
                     </p>
                     {searchTerm && (
-                      <Button variant="outline" onClick={() => setSearchTerm("")}>
+                      <Button
+                        variant="outline"
+                        onClick={() => setSearchTerm("")}
+                      >
                         Clear Search
                       </Button>
                     )}
@@ -330,7 +404,9 @@ export default function InvestorSettlementsPage() {
                       <div className="flex justify-between items-start">
                         <div>
                           <CardTitle>{settlement.projectTitle}</CardTitle>
-                          <CardDescription>Farmer: {settlement.farmerName}</CardDescription>
+                          <CardDescription>
+                            Farmer: {settlement.farmerName}
+                          </CardDescription>
                         </div>
                         <StatusBadge status={settlement.status} />
                       </div>
@@ -340,28 +416,48 @@ export default function InvestorSettlementsPage() {
                         <div className="space-y-4">
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <div className="text-sm text-muted-foreground">Your Investment</div>
-                              <div className="text-lg font-bold">${settlement.investmentAmount} RLUSD</div>
+                              <div className="text-sm text-muted-foreground">
+                                Your Investment
+                              </div>
+                              <div className="text-lg font-bold">
+                                ${settlement.investmentAmount} RLUSD
+                              </div>
                             </div>
                             <div>
-                              <div className="text-sm text-muted-foreground">Expected Return</div>
-                              <div className="text-lg font-bold text-blue-600">${settlement.expectedReturn} RLUSD</div>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-4">
-                            <div>
-                              <div className="text-sm text-muted-foreground">Expected Profit</div>
-                              <div className="text-lg font-bold text-blue-600">+${settlement.expectedProfit} RLUSD</div>
-                            </div>
-                            <div>
-                              <div className="text-sm text-muted-foreground">Expected ROI</div>
-                              <div className="text-lg font-bold text-blue-600">+{settlement.expectedRoi}%</div>
+                              <div className="text-sm text-muted-foreground">
+                                Expected Return
+                              </div>
+                              <div className="text-lg font-bold text-blue-600">
+                                ${settlement.expectedReturn} RLUSD
+                              </div>
                             </div>
                           </div>
                           <div className="grid grid-cols-2 gap-4">
                             <div>
-                              <div className="text-sm text-muted-foreground">Harvest Date</div>
-                              <div className="text-sm">{settlement.harvestDate}</div>
+                              <div className="text-sm text-muted-foreground">
+                                Expected Profit
+                              </div>
+                              <div className="text-lg font-bold text-blue-600">
+                                +${settlement.expectedProfit} RLUSD
+                              </div>
+                            </div>
+                            <div>
+                              <div className="text-sm text-muted-foreground">
+                                Expected ROI
+                              </div>
+                              <div className="text-lg font-bold text-blue-600">
+                                +{settlement.expectedRoi}%
+                              </div>
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <div className="text-sm text-muted-foreground">
+                                Harvest Date
+                              </div>
+                              <div className="text-sm">
+                                {settlement.harvestDate}
+                              </div>
                             </div>
                             <div>
                               <div className="text-sm text-muted-foreground">
@@ -370,7 +466,8 @@ export default function InvestorSettlementsPage() {
                                   : "Expected Submission"}
                               </div>
                               <div className="text-sm">
-                                {settlement.submissionDate || settlement.expectedSubmissionDate}
+                                {settlement.submissionDate ||
+                                  settlement.expectedSubmissionDate}
                               </div>
                             </div>
                           </div>
@@ -381,10 +478,15 @@ export default function InvestorSettlementsPage() {
                               <div className="flex items-start gap-3">
                                 <Clock className="w-5 h-5 text-blue-600 mt-0.5" />
                                 <div>
-                                  <h4 className="font-medium text-blue-800">Verification In Progress</h4>
+                                  <h4 className="font-medium text-blue-800">
+                                    Verification In Progress
+                                  </h4>
                                   <p className="text-sm text-blue-700">
-                                    The farmer has submitted settlement documentation which is currently being verified
-                                    by platform administrators. You will be notified when verification is complete.
+                                    The farmer has submitted settlement
+                                    documentation which is currently being
+                                    verified by platform administrators. You
+                                    will be notified when verification is
+                                    complete.
                                   </p>
                                 </div>
                               </div>
@@ -394,9 +496,12 @@ export default function InvestorSettlementsPage() {
                               <div className="flex items-start gap-3">
                                 <Calendar className="w-5 h-5 text-yellow-600 mt-0.5" />
                                 <div>
-                                  <h4 className="font-medium text-yellow-800">Awaiting Harvest Completion</h4>
+                                  <h4 className="font-medium text-yellow-800">
+                                    Awaiting Harvest Completion
+                                  </h4>
                                   <p className="text-sm text-yellow-700">
-                                    This project is currently in the harvesting phase. The farmer will submit settlement
+                                    This project is currently in the harvesting
+                                    phase. The farmer will submit settlement
                                     documentation after harvest completion.
                                   </p>
                                 </div>
@@ -404,13 +509,22 @@ export default function InvestorSettlementsPage() {
                             </div>
                           )}
                           <div className="flex flex-col gap-2">
-                            <Button variant="outline" size="sm" className="justify-start" asChild>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="justify-start"
+                              asChild
+                            >
                               <Link href={`/projects/${settlement.projectId}`}>
                                 <Eye className="w-4 h-4 mr-2" />
                                 View Project Details
                               </Link>
                             </Button>
-                            <Button variant="outline" size="sm" className="justify-start">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="justify-start"
+                            >
                               <TrendingUp className="w-4 h-4 mr-2" />
                               View Expected Returns
                             </Button>
@@ -446,13 +560,21 @@ export default function InvestorSettlementsPage() {
                   {settlementData.completed.map((settlement) => (
                     <TableRow key={settlement.id}>
                       <TableCell>
-                        <div className="font-medium">{settlement.projectTitle}</div>
-                        <div className="text-sm text-muted-foreground">{settlement.farmerName}</div>
+                        <div className="font-medium">
+                          {settlement.projectTitle}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {settlement.farmerName}
+                        </div>
                       </TableCell>
                       <TableCell>{settlement.completionDate}</TableCell>
                       <TableCell>${settlement.investmentAmount}</TableCell>
-                      <TableCell className="text-green-600">${settlement.returnAmount}</TableCell>
-                      <TableCell className="text-green-600">+{settlement.roi}%</TableCell>
+                      <TableCell className="text-green-600">
+                        ${settlement.returnAmount}
+                      </TableCell>
+                      <TableCell className="text-green-600">
+                        +{settlement.roi}%
+                      </TableCell>
                       <TableCell>
                         <StatusBadge status={settlement.status} />
                       </TableCell>
@@ -467,17 +589,28 @@ export default function InvestorSettlementsPage() {
                     </TableRow>
                   ))}
                   {settlementData.pending
-                    .filter((settlement) => settlement.status === "verification_pending")
+                    .filter(
+                      (settlement) =>
+                        settlement.status === "verification_pending"
+                    )
                     .map((settlement) => (
                       <TableRow key={settlement.id}>
                         <TableCell>
-                          <div className="font-medium">{settlement.projectTitle}</div>
-                          <div className="text-sm text-muted-foreground">{settlement.farmerName}</div>
+                          <div className="font-medium">
+                            {settlement.projectTitle}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            {settlement.farmerName}
+                          </div>
                         </TableCell>
                         <TableCell>{settlement.harvestDate}</TableCell>
                         <TableCell>${settlement.investmentAmount}</TableCell>
-                        <TableCell className="text-blue-600">${settlement.expectedReturn}</TableCell>
-                        <TableCell className="text-blue-600">+{settlement.expectedRoi}%</TableCell>
+                        <TableCell className="text-blue-600">
+                          ${settlement.expectedReturn}
+                        </TableCell>
+                        <TableCell className="text-blue-600">
+                          +{settlement.expectedRoi}%
+                        </TableCell>
                         <TableCell>
                           <StatusBadge status={settlement.status} />
                         </TableCell>
@@ -502,16 +635,20 @@ export default function InvestorSettlementsPage() {
           <div className="flex items-start gap-3">
             <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5" />
             <div>
-              <h4 className="font-medium text-blue-800 mb-2">About Settlement Verification</h4>
+              <h4 className="font-medium text-blue-800 mb-2">
+                About Settlement Verification
+              </h4>
               <p className="text-sm text-blue-700">
-                All settlements are verified by platform administrators to ensure accuracy and transparency. Settlement
-                documentation is stored on IPFS and verification records are permanently stored on the XRP Ledger,
-                providing an immutable audit trail for all transactions.
+                All settlements are verified by platform administrators to
+                ensure accuracy and transparency. Settlement documentation is
+                stored on IPFS and verification records are permanently stored
+                on the XRP Ledger, providing an immutable audit trail for all
+                transactions.
               </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
